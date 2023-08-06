@@ -1,5 +1,5 @@
 import 'package:lime_english/app/data/enum/animals.dart';
-import 'package:lime_english/app/data/services/app_config/service.dart';
+import 'package:lime_english/app/data/services/app_config_service.dart';
 import 'package:lime_english/app/modules/home/repository.dart';
 import 'package:lime_english/core/utils/functions/verify_response.dart';
 import 'package:lime_english/core/values/consts.dart';
@@ -29,7 +29,7 @@ class HomeController extends GetxController with StateMixin {
   logout() async {
     await config!.changeIsLogged(false);
 
-    await Get.offAllNamed(Routes.LOGIN);
+    await Get.offAllNamed(Routes.login);
   }
 
   getCats() async {

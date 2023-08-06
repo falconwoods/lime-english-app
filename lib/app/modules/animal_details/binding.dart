@@ -7,6 +7,6 @@ class AnimalDetailsBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<AnimalDetailsController>(
-        () => AnimalDetailsController(AnimalDetailsRepository(MyApi())));
+        () => AnimalDetailsController(AnimalDetailsRepository(LimeApi())));
   }
 }

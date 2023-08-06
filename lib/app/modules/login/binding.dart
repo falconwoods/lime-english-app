@@ -7,6 +7,6 @@ class LoginBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<LoginController>(
-        () => LoginController(LoginRepository(MyApi())));
+        () => LoginController(LoginRepository(LimeApi())));
   }
 }

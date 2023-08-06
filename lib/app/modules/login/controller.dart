@@ -32,7 +32,7 @@ class LoginController extends GetxController {
   reauth() async {
     await Future.delayed(Duration.zero, () {
       if (config!.isLogged()) {
-        Get.offNamed(Routes.HOME);
+        Get.offNamed(Routes.home);
       }
     });
   }
@@ -46,7 +46,7 @@ class LoginController extends GetxController {
       ));
     } else {
       config!.changeIsLogged(true);
-      Get.offNamed(Routes.HOME);
+      Get.offNamed(Routes.home);
     }
   }
 

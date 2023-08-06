@@ -1,7 +1,7 @@
 import 'package:lime_english/app/data/provider/api.dart';
 
 class HomeRepository {
-  final MyApi api;
+  final LimeApi api;
 
   HomeRepository(this.api);
 

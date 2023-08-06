@@ -1,52 +1,92 @@
 import 'dart:convert';
 
-import 'package:lime_english/app/data/models/animals.dart';
+import 'package:get/get.dart';
+import 'package:lime_english/app/data/models/api_res.dart';
 import 'package:lime_english/app/data/models/app_error.dart';
 import 'package:lime_english/app/data/models/user.dart';
+import 'package:lime_english/app/data/services/app_config_service.dart';
+import 'package:lime_english/core/utils/functions/crypto_utils.dart';
 import 'package:lime_english/core/utils/headers_api.dart';
-import 'package:lime_english/core/values/consts.dart';
-import 'package:get/get_connect/connect.dart';
+import 'package:lime_english/core/values/env.dart';
 
-const catsUrl = 'https://api.thecatapi.com/v1/images/search';
-const dogsUrl = 'https://api.thedogapi.com/v1/images/search';
+class LimeApi extends GetConnect {
+  late final AppConfigService _appCfg;
 
-class MyApi extends GetConnect {
-  login(String _) async {
-    bool? exists;
-    exists = jsonUsers['users']!.contains(_);
-    return exists ? User(email: _) : AppError(message: 'E-mail não existe');
+  LimeApi() {
+    _appCfg = Get.find<AppConfigService>();
   }
 
-  getCats() async {
-    final _ = await get('$catsUrl/?limit=20&page=1&order=desc',
-        decoder: (_) => _,
-        headers: HeadersAPI(apiKey: CAT_API_KEY).getHeaders());
-    if (_.hasError) {
-      return AppError(message: 'Algum erro inesperado aconteceu');
-    } else {
-      return animalsFromJson(_.body);
+  Map<String, String> getHeadersWithToken() {
+    return HeadersAPI(apiKey: _appCfg!.userToken).getHeaders();
+  }
+
+  getWithToken<T>(
+    String api, {
+    Map<String, String>? headers,
+    String? contentType,
+    Map<String, dynamic>? query,
+    Decoder<T>? decoder,
+  }) async {
+    final res = await get('$apiServer',
+        headers: getHeadersWithToken(), query: query, decoder: decoder);
+    if (res.hasError) {
+      return await handleError(res);
     }
+
+    return res;
   }
 
-  getDogs() async {
-    final _ = await get('$dogsUrl/?limit=20&page=1&order=desc',
-        decoder: (_) => _,
-        headers: HeadersAPI(apiKey: DOG_API_KEY).getHeaders());
+  postWithToken<T>(
+    String? api,
+    dynamic body, {
+    String? contentType,
+    Map<String, String>? headers,
+    Map<String, dynamic>? query,
+    Decoder<T>? decoder,
+    Progress? uploadProgress,
+  }) async {
+    final res = await post('$apiServer$api', body,
+        contentType: contentType,
+        headers: getHeadersWithToken(),
+        query: query,
+        decoder: decoder,
+        uploadProgress: uploadProgress);
 
-    if (_.hasError) {
-      return AppError(message: 'Algum erro inesperado aconteceu');
-    } else {
-      return animalsFromJson(_.body);
+    if (res.hasError) {
+      return await handleError(res);
     }
+    return ApiResponse(res.statusCode, res.body);
   }
 
-  getAll() async {
-    var list;
-    await Future.wait<dynamic>([getCats(), getDogs()]).then((value) {
-      list = value.first;
-      list.addAll(value.last);
-    });
-    list.sort((a, b) => a.hashCode.compareTo(b.hashCode));
-    return list;
+  handleError(Response<dynamic> res) async {
+    if (res.statusCode == 401) {
+      Get.snackbar('', 'invalid_auth'.tr);
+      await Get.toNamed('/login');
+    }
+    return AppError(message: 'error', status: res.statusCode);
+  }
+
+  login(String username, String password) async {
+    final res = await postWithToken(
+      '/login',
+      {
+        'username': username.trim(),
+        'password': hashPassword(password.trim(), ''),
+      },
+    );
+
+    if (res.runtimeType == AppError) {
+      return ApiResponse(res.status, res.message, null);
+    }
+
+    return ApiResponse(res.statuscode, '', res.body);
+  }
+
+  getUserInfo() async {
+    final res = await getWithToken('/user');
+    if (res.runtimeType == AppError) {
+      return ApiResponse(res.status, res.message, null);
+    }
+    return ApiResponse(res.statuscode, '', User.fromJson(res.body));
   }
 }

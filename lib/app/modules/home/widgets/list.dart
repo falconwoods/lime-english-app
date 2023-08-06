@@ -16,7 +16,7 @@ class ListAnimalsWidget extends GetView<HomeController> {
             // itemCount: myProducts.length,
             itemCount: controller.state.length,
             itemBuilder: (BuildContext ctx, _) => GestureDetector(
-                onTap: () => Get.toNamed(Routes.ANIMAL_DETAILS,
+                onTap: () => Get.toNamed(Routes.animalDetails,
                     arguments: controller.state[_]),
                 child: FractionallySizedBox(
                   heightFactor: 1,
