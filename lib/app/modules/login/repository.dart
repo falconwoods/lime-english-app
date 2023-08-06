@@ -1,7 +1,7 @@
-import 'package:lime_english/app/data/provider/api.dart';
+import 'package:lime_english/app/data/provider/base_api.dart';
 
 class LoginRepository {
-  final LimeApi api;
+  final BaseAPI api;
 
   LoginRepository(this.api);
 }

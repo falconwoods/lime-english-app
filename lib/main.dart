@@ -1,4 +1,4 @@
-import 'package:lime_english/app/data/services/app_config_service.dart';
+import 'package:lime_english/app/data/services/config_service.dart';
 import 'package:lime_english/app/data/services/auth_service.dart';
 import 'package:lime_english/app/modules/login/binding.dart';
 import 'package:lime_english/routes/pages.dart';
@@ -21,7 +21,7 @@ void main() async {
 
   runApp(GetMaterialApp(
     initialBinding: LoginBinding(),
-    initialRoute: Routes.login,
+    initialRoute: Routes.LOGIN,
     getPages: AppPages.pages,
     theme: ThemeData.light(),
     darkTheme: ThemeData.dark(),

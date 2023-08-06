@@ -1,7 +1,7 @@
-import '../../data/provider/api.dart';
+import '../../data/provider/base_api.dart';
 
 class LearnRepository {
-  final LimeApi api;
+  final BaseAPI api;
 
   LearnRepository(this.api);
 

@@ -8,6 +8,9 @@ import 'package:get/get.dart';
 
 class LoginPage extends GetView<LoginController> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController emailCtl = TextEditingController();
+  final TextEditingController pwdCtl = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
