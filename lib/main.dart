@@ -23,7 +23,7 @@ void main() async {
     initialBinding: LoginBinding(),
     initialRoute: Routes.LOGIN,
     getPages: AppPages.pages,
-    theme: ThemeData.light(),
+    theme: ThemeData(useMaterial3: true, colorSchemeSeed: const Color(0xff6750a4)),
     darkTheme: ThemeData.dark(),
     debugShowCheckedModeBanner: false,
   ));
