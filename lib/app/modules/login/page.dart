@@ -1,36 +1,55 @@
 import 'package:lime_english/app/modules/login/controller.dart';
-import 'package:lime_english/app/modules/login/widgets/form.dart';
-import 'package:lime_english/app/modules/login/widgets/top_section.dart';
-import 'package:lime_english/core/utils/functions/size_config.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends GetView<LoginController> {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController emailCtl = TextEditingController();
   final TextEditingController pwdCtl = TextEditingController();
 
+  LoginPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
-
     return Scaffold(
-        body: SafeArea(
-            child: Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const TopSectionWidget(),
-          Expanded(child: Container()),
-          Expanded(
-              flex: 3,
-              child: LoginFormwidget(
-                formkey: _formKey,
-              )),
-        ],
+      appBar: AppBar(
+        title: const Text('Password Login'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
-    )));
+      body: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const TextField(
+              decoration: InputDecoration(
+                labelText: 'Email',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            const TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 24.0),
+            ElevatedButton(
+              onPressed: () {
+                // Perform login logic here
+              },
+              child: const Text('Login'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

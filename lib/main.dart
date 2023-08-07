@@ -13,7 +13,7 @@ void main() async {
   await GetStorage.init();
 
   // load env
-  await dotenv.load(fileName: '.env');
+  await dotenv.load();
 
   // register dependencies
   await Get.putAsync(() => AppConfigService().init());

@@ -1,9 +1,7 @@
 import 'package:get/get.dart';
-import 'package:lime_english/app/modules/learn/repository.dart';
 
 class LearnController extends GetxController {
-  final LearnRepository repository;
-  LearnController(this.repository);
+  LearnController();
 
   final _obj = ''.obs;
   set obj(value) => _obj.value = value;
