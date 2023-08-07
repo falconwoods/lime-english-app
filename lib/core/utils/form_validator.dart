@@ -1,21 +1,12 @@
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 class FormValidator {
-  static String? email(String? value) {
-    if (!GetUtils.isEmail(value ?? '')) {
-      return 'please input valid email'.tr;
-    }
-    return null;
-  }
-
-  static String? password(String? value) {
-    if (RegExp(r'\s').hasMatch(value ?? '')) {
-      return 'password cannot contain white space'.tr;
-    }
-    if (GetUtils.isLengthLessThan(value, 6)) {
-      return 'password length must > 6'.tr;
-    }
-
-    return null;
-  }
+  static FormFieldValidator<String> notMatch(
+    String pattern, {
+    String? errorText,
+  }) =>
+      (valueCandidate) => true == valueCandidate?.isNotEmpty && RegExp(pattern).hasMatch(valueCandidate!)
+          ? errorText ?? FormBuilderLocalizations.current.matchErrorText
+          : null;
 }
