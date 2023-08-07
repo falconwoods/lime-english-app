@@ -11,7 +11,11 @@ class LoginPage extends GetView<LoginController> {
   LoginPage({super.key});
 
   void onSubmit() {
-    // print(_formKey.currentState.);
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState?.save();
+    }
+    debugPrint(_formKey.currentState?.value.toString());
+    Get.snackbar('success', _formKey.currentState?.value['email']);
   }
 
   @override
@@ -58,12 +62,7 @@ class LoginPage extends GetView<LoginController> {
                     ])),
                 const SizedBox(height: 24.0),
                 ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState?.save();
-                    }
-                    debugPrint(_formKey.currentState?.value.toString());
-                  },
+                  onPressed: onSubmit,
                   child: const Text('Login'),
                 ),
               ],
