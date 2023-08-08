@@ -21,7 +21,7 @@ class LoginController extends GetxController {
     String password = '';
     final res = await auth.login({username, password});
     if (res.isOk) {
-      Get.offNamed(Routes.HOME);
+      // Get.offNamed(Routes.HOME);
     } else {
       // password error?
     }
