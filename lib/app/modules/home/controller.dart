@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class LearnController extends GetxController {
-  LearnController();
+class HomeController extends GetxController {
+  HomeController();
 
   final RxInt selectedIndex = 0.obs;
 }

@@ -1,5 +1,5 @@
-import 'package:lime_english/app/modules/learn/binding.dart';
-import 'package:lime_english/app/modules/learn/page.dart';
+import 'package:lime_english/app/modules/home/binding.dart';
+import 'package:lime_english/app/modules/home/page.dart';
 import 'package:lime_english/app/modules/login/binding.dart';
 import 'package:lime_english/app/modules/login/page.dart';
 import 'package:get/get.dart';
@@ -14,6 +14,7 @@ abstract class AppPages {
         name: Routes.LOGIN_PASSWORD,
         page: () => PasswordLoginPage(),
         bindings: [LoginBinding()]),
-    GetPage(name: Routes.LEARN, page: () => LearnPage(), bindings: []),
+    GetPage(
+        name: Routes.HOME, page: () => HomePage(), bindings: [HomeBinding()]),
   ];
 }
