@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lime_english/app/modules/home/controller.dart';
 import 'package:lime_english/app/modules/home/widgets/home_nav_bar.dart';
+import 'package:lime_english/app/modules/learn/page.dart';
+import 'package:lime_english/app/modules/my/page.dart';
+import 'package:lime_english/app/modules/quiz/page.dart';
+import 'package:lime_english/app/modules/review/page.dart';
 
 class HomePage extends GetView<HomeController> {
   final List<Widget> _pages = [
-    FirstPage(),
-    SecondPage(),
-    ThirdPage(),
-    FourthPage(),
+    const LearnPage(),
+    const ReviewPage(),
+    const QuizPage(),
+    const MyPage(),
   ];
 
   HomePage({Key? key}) : super(key: key);
@@ -24,33 +28,5 @@ class HomePage extends GetView<HomeController> {
             },
           ),
         ));
-  }
-}
-
-class FirstPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('First Page'));
-  }
-}
-
-class SecondPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Second Page'));
-  }
-}
-
-class ThirdPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Third Page'));
-  }
-}
-
-class FourthPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Fourth Page'));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:lime_english/app/data/services/config_service.dart';
 import 'package:lime_english/app/data/services/auth_service.dart';
+import 'package:lime_english/app/modules/home/binding.dart';
 import 'package:lime_english/app/modules/login/binding.dart';
 import 'package:lime_english/core/theme/light_theme.dart';
 import 'package:lime_english/core/utils/app_ui.dart';
@@ -25,8 +26,8 @@ void main() async {
   AppUI.setThemeData(lightTheme);
 
   runApp(GetMaterialApp(
-    initialBinding: LoginBinding(),
-    initialRoute: Routes.LOGIN,
+    initialBinding: HomeBinding(),
+    initialRoute: Routes.HOME,
     getPages: AppPages.pages,
     theme: lightTheme,
     darkTheme: ThemeData.dark(),

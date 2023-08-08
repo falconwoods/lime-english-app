@@ -12,5 +12,7 @@ ThemeData get lightTheme {
       snackBarTheme: SnackBarThemeData(
           contentTextStyle: TextStyle(color: Colors.teal.shade900),
           backgroundColor: Colors.teal.shade50),
+      // bottomNavigationBarTheme:
+      //     BottomNavigationBarThemeData(backgroundColor: Colors.black12),
       splashFactory: const NoSplashFactory());
 }

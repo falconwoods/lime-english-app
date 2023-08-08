@@ -15,7 +15,8 @@ class PasswordLoginPage extends GetView<LoginController> {
     // if (!_formKey.currentState!.validate()) return;
     // _formKey.currentState?.save();
 
-    Get.offNamed(Routes.HOME);
+    Get.toNamed(Routes.HOME);
+    // Get.clearRouteTree();
   }
 
   @override
