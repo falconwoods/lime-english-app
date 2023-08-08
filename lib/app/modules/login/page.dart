@@ -3,6 +3,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:lime_english/app/modules/login/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lime_english/core/utils/app_ui.dart';
 import 'package:lime_english/core/utils/form_validator.dart';
 
 class LoginPage extends GetView<LoginController> {
@@ -10,12 +11,13 @@ class LoginPage extends GetView<LoginController> {
 
   LoginPage({super.key});
 
-  void onSubmit() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState?.save();
-    }
-    debugPrint(_formKey.currentState?.value.toString());
-    Get.snackbar('success', _formKey.currentState?.value['email']);
+  void onSubmit(context) {
+    // if (!_formKey.currentState!.validate()) return;
+    // _formKey.currentState?.save();
+
+    // debugPrint(_formKey.currentState?.value.toString());
+
+    AppUI.snackbar('success', 'hello');
   }
 
   @override
@@ -41,10 +43,13 @@ class LoginPage extends GetView<LoginController> {
                 FormBuilderTextField(
                     name: 'email',
                     keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(hintText: 'Email', border: UnderlineInputBorder()),
+                    decoration: const InputDecoration(
+                        hintText: 'Email', border: UnderlineInputBorder()),
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(errorText: 'cannot be empty'),
-                      FormBuilderValidators.email(errorText: 'please input valid email')
+                      FormBuilderValidators.required(
+                          errorText: 'cannot be empty'),
+                      FormBuilderValidators.email(
+                          errorText: 'please input valid email')
                     ])),
                 const SizedBox(height: 16.0),
                 FormBuilderTextField(
@@ -57,12 +62,14 @@ class LoginPage extends GetView<LoginController> {
                     ),
                     validator: FormBuilderValidators.compose([
                       FormBuilderValidators.required(),
-                      FormBuilderValidators.minLength(6, errorText: 'length must >= 6'),
-                      FormValidator.notMatch(r'\s', errorText: 'cannot contain whitespace')
+                      FormBuilderValidators.minLength(6,
+                          errorText: 'length must >= 6'),
+                      FormValidator.notMatch(r'\s',
+                          errorText: 'cannot contain whitespace')
                     ])),
                 const SizedBox(height: 24.0),
                 ElevatedButton(
-                  onPressed: onSubmit,
+                  onPressed: () => onSubmit(context),
                   child: const Text('Login'),
                 ),
               ],

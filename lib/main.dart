@@ -1,6 +1,8 @@
 import 'package:lime_english/app/data/services/config_service.dart';
 import 'package:lime_english/app/data/services/auth_service.dart';
 import 'package:lime_english/app/modules/login/binding.dart';
+import 'package:lime_english/core/theme/light_theme.dart';
+import 'package:lime_english/core/utils/app_ui.dart';
 import 'package:lime_english/routes/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,12 +21,16 @@ void main() async {
   await Get.putAsync(() => AppConfigService().init());
   await Get.putAsync(() => AuthService().init());
 
+  // TODO: update theme when it changed
+  AppUI.setThemeData(lightTheme);
+
   runApp(GetMaterialApp(
     initialBinding: LoginBinding(),
     initialRoute: Routes.LOGIN,
     getPages: AppPages.pages,
-    theme: ThemeData(useMaterial3: true, colorSchemeSeed: const Color(0xff6750a4)),
+    theme: lightTheme,
     darkTheme: ThemeData.dark(),
+    themeMode: ThemeMode.light,
     debugShowCheckedModeBanner: false,
   ));
 }
