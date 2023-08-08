@@ -18,7 +18,7 @@ class HomeNavBar extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
           children: [
-            _buildNavItem(context, FontAwesomeIcons.bookAtlas, 'Learn', 0),
+            _buildNavItem(context, FontAwesomeIcons.bookBible, 'Learn', 0),
             _buildNavItem(context, FontAwesomeIcons.book, 'Review', 1),
             _buildNavItem(context, Icons.quiz_outlined, 'Quiz', 2),
             _buildNavItem(context, FontAwesomeIcons.user, 'My', 3),
@@ -27,7 +27,8 @@ class HomeNavBar extends StatelessWidget {
   }
 
   Widget _buildNavItem(BuildContext context, icon, String label, int index) {
-    final Color mainColor = Theme.of(context).colorScheme.primary;
+    const Color mainColor = Color.fromARGB(255, 96, 202, 150);
+    // final Color mainColor = Theme.of(context).primaryColor;
 
     return Expanded(
       child: InkWell(
@@ -40,10 +41,12 @@ class HomeNavBar extends StatelessWidget {
           children: [
             Icon(icon,
                 color:
-                    selectedIndex.value == index ? mainColor : Colors.black54),
+                    selectedIndex.value == index ? mainColor : Colors.black26),
+            const SizedBox(height: 2),
             Text(
               label,
               style: TextStyle(
+                  fontSize: 10,
                   color: selectedIndex.value == index
                       ? mainColor
                       : Colors.black54),
