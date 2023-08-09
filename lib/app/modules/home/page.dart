@@ -19,14 +19,15 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Scaffold(
-          body: _pages[controller.selectedIndex.value],
-          bottomNavigationBar: HomeNavBar(
-            selectedIndex: controller.selectedIndex,
-            onItemTap: (index) {
-              controller.selectedIndex.value = index;
-            },
-          ),
-        ));
+    return SafeArea(
+        child: Scaffold(
+      body: Obx(() => _pages[controller.selectedIndex.value]),
+      bottomNavigationBar: HomeNavBar(
+        selectedIndex: controller.selectedIndex,
+        onItemTap: (index) {
+          controller.selectedIndex.value = index;
+        },
+      ),
+    ));
   }
 }

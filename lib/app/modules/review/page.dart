@@ -10,15 +10,10 @@ class ReviewPage extends GetView<ReviewController> {
   Widget build(BuildContext context) {
     Get.put(ReviewController());
 
-    return Obx(() => Scaffold(
-            body: SafeArea(
-                child: Row(
-          children: [
-            FilledButton(
-                onPressed: () => controller.count.value++,
-                child: Text('review')),
-            Text('${controller.count.value}')
-          ],
-        ))));
+    return Scaffold(
+        body: SafeArea(
+            child: Row(
+      children: [],
+    )));
   }
 }
