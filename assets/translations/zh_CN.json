@@ -1,0 +1,15 @@
+{
+    "Login": "登录",
+    "Logout": "退出",
+    "Signup": "注册",
+    "Email / Phone": "邮箱 / 手机",
+    "Password": "密码",
+    "Password Login": "密码登录",
+    "Phone Login": "短信登录",
+    "Wechat Login": "微信登录",
+    "Apple Login": "苹果登录",
+    "Learn":"学习",
+    "Review": "复习",
+    "Quiz":"测验",
+    "My":"我的"
+}

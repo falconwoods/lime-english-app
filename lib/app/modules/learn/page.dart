@@ -9,14 +9,10 @@ class LearnPage extends GetView<LearnController> {
   Widget build(BuildContext context) {
     Get.put(LearnController());
 
-    return Obx(() => Scaffold(
-            body: SafeArea(
-                child: Row(
-          children: [
-            FilledButton(
-                onPressed: () => controller.count.value++, child: Text('ok')),
-            Text('${controller.count.value}')
-          ],
-        ))));
+    return Scaffold(
+        body: SafeArea(
+            child: Row(
+      children: [],
+    )));
   }
 }

@@ -46,19 +46,20 @@ class LoginPage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 200),
-                    LoginOption(FontAwesomeIcons.key, Colors.blue, 'password',
+                    LoginOption(
+                        FontAwesomeIcons.key, Colors.blue, 'Password Login'.tr,
                         () {
                       Get.toNamed(Routes.LOGIN_PASSWORD);
                     }),
                     const SizedBox(height: 8),
                     LoginOption(FontAwesomeIcons.mobileScreen, Colors.blue,
-                        'phone', () {}),
+                        'Phone Login'.tr, () {}),
                     const SizedBox(height: 8),
-                    LoginOption(
-                        FontAwesomeIcons.weixin, Colors.green, 'wexin', () {}),
+                    LoginOption(FontAwesomeIcons.weixin, Colors.green,
+                        'Wechat Login'.tr, () {}),
                     const SizedBox(height: 8),
-                    LoginOption(
-                        FontAwesomeIcons.apple, Colors.black, 'apple', () {})
+                    LoginOption(FontAwesomeIcons.apple, Colors.black,
+                        'Apple Login'.tr, () {})
                   ],
                 ))));
   }

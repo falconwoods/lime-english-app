@@ -1,3 +1,4 @@
+import 'package:lime_english/app/data/app_translations.dart';
 import 'package:lime_english/app/data/services/config_service.dart';
 import 'package:lime_english/app/data/services/auth_service.dart';
 import 'package:lime_english/app/modules/home/binding.dart';
@@ -18,6 +19,9 @@ void main() async {
   // load env
   await dotenv.load();
 
+  // load translations
+  final appTrans = await AppTranslations().load();
+
   // register dependencies
   await Get.putAsync(() => AppConfigService().init());
   await Get.putAsync(() => AuthService().init());
@@ -26,6 +30,8 @@ void main() async {
   AppUI.setThemeData(lightTheme);
 
   runApp(GetMaterialApp(
+    locale: Get.deviceLocale,
+    translations: appTrans,
     initialBinding: HomeBinding(),
     initialRoute: Routes.HOME,
     getPages: AppPages.pages,

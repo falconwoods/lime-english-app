@@ -21,13 +21,13 @@ class HomeNavBar extends StatelessWidget {
               child: Row(
                 children: [
                   _buildNavItem(
-                      context, FontAwesomeIcons.paperPlane, 'Learn', 0),
+                      context, FontAwesomeIcons.paperPlane, 'Learn'.tr, 0),
                   _buildNavItem(
-                      context, FontAwesomeIcons.bookOpenReader, 'Review', 1),
+                      context, FontAwesomeIcons.bookOpenReader, 'Review'.tr, 1),
                   _buildNavItem(
-                      context, FontAwesomeIcons.penToSquare, 'Quiz', 2),
+                      context, FontAwesomeIcons.penToSquare, 'Quiz'.tr, 2),
                   _buildNavItem(
-                      context, FontAwesomeIcons.userGraduate, 'My', 3),
+                      context, FontAwesomeIcons.userGraduate, 'My'.tr, 3),
                 ],
               )),
         ));

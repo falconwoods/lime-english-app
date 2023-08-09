@@ -43,8 +43,8 @@ class PasswordLoginPage extends GetView<LoginController> {
                       FormBuilderTextField(
                           name: 'email',
                           keyboardType: TextInputType.emailAddress,
-                          decoration: const InputDecoration(
-                              hintText: 'Email / Phone',
+                          decoration: InputDecoration(
+                              hintText: 'Email / Phone'.tr,
                               border: UnderlineInputBorder()),
                           validator: FormBuilderValidators.compose([
                             FormBuilderValidators.required(
@@ -57,9 +57,9 @@ class PasswordLoginPage extends GetView<LoginController> {
                           name: 'password',
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: true,
-                          decoration: const InputDecoration(
-                            hintText: 'Password',
-                            border: UnderlineInputBorder(),
+                          decoration: InputDecoration(
+                            hintText: 'Password'.tr,
+                            border: const UnderlineInputBorder(),
                           ),
                           validator: FormBuilderValidators.compose([
                             FormBuilderValidators.required(),
@@ -71,7 +71,7 @@ class PasswordLoginPage extends GetView<LoginController> {
                       const SizedBox(height: 24.0),
                       ElevatedButton(
                         onPressed: () => onSubmit(context),
-                        child: const Text('Login'),
+                        child: Text('Login'.tr),
                       ),
                     ],
                   ),

@@ -15,7 +15,7 @@ class MyPage extends GetView<MyController> {
             child: Row(
       children: [
         FilledButton(
-            onPressed: () => Get.toNamed(Routes.LOGIN), child: Text('Logout')),
+            onPressed: () => Get.toNamed(Routes.LOGIN), child: Text('Login')),
       ],
     )));
   }
