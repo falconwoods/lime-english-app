@@ -10,9 +10,11 @@ class LearnPage extends GetView<LearnController> {
     Get.put(LearnController());
 
     return Scaffold(
-        body: SafeArea(
-            child: Row(
-      children: [],
+        body: SingleChildScrollView(
+            child: Container(
+      child: Column(
+        children: [],
+      ),
     )));
   }
 }

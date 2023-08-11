@@ -9,7 +9,7 @@ part './routes.dart';
 
 abstract class AppPages {
   static final pages = [
-    GetPage(name: Routes.LOGIN, page: () => const LoginPage(), bindings: []),
+    GetPage(name: Routes.LOGIN, page: () => const LoginPage()),
     GetPage(
         name: Routes.LOGIN_PASSWORD,
         page: () => PasswordLoginPage(),

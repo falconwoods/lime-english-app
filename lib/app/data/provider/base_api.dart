@@ -11,8 +11,10 @@ abstract class BaseAPI extends GetConnect {
     _appCfg = Get.find<AppConfigService>();
   }
 
-  getAuth<T>(String api, {Map<String, dynamic>? query, bool auth = true}) async {
-    final res = await get('$apiServer', headers: getHeaders(auth), query: query);
+  getAuth<T>(String api,
+      {Map<String, dynamic>? query, bool auth = true}) async {
+    final res =
+        await get('$apiServer$api', headers: getHeaders(auth), query: query);
     return await processRes(res);
   }
 
@@ -62,7 +64,10 @@ abstract class BaseAPI extends GetConnect {
   }
 
   Map<String, String> getAPIHeaders(String apiKey) {
-    var headers = {"Content-Type": "application/json", "Accept-Charset": "UTF-8"};
+    var headers = {
+      "Content-Type": "application/json",
+      "Accept-Charset": "UTF-8"
+    };
     if (apiKey.isNotEmpty) {
       headers['Authorization'] = 'Bearer $apiKey';
     }

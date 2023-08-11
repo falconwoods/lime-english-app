@@ -26,13 +26,4 @@ class LoginController extends GetxController {
       // password error?
     }
   }
-
-  // onChangeEmail(_) {
-  //   GetUtils.isEmail(_) ? isEmail.value = true : isEmail.value = false;
-
-  //   user.update((val) => val!.email = _);
-  // }
-
-  // onSavedEmail(_) => user.update((val) => val!.email = _);
-  // onValidateEmail(_) => GetUtils.isEmail(_) ? null : 'Insira um email válido';
 }

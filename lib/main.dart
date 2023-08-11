@@ -31,6 +31,7 @@ void main() async {
 
   runApp(GetMaterialApp(
     locale: Get.deviceLocale,
+    fallbackLocale: const Locale('en', 'US'),
     translations: appTrans,
     initialBinding: HomeBinding(),
     initialRoute: Routes.HOME,
