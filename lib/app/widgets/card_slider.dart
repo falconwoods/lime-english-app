@@ -8,13 +8,14 @@ class CardSlider<T> extends StatelessWidget {
   late final String title;
   late final int columnItemNum;
   late final double itemHeight;
+  late final double viewportFraction;
   late final List<T> arr;
   late final WidgetBuilderWithData<T> itemBuilder;
   late final ValueSetter<T> onClickItem;
   late final VoidCallback onMore;
 
   CardSlider(this.title, this.arr, this.columnItemNum, this.itemHeight,
-      this.itemBuilder, this.onClickItem, this.onMore,
+      this.viewportFraction, this.itemBuilder, this.onClickItem, this.onMore,
       {super.key});
 
   getItems(context) {
@@ -30,6 +31,7 @@ class CardSlider<T> extends StatelessWidget {
         }
       }
       list.add(Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: columnChildren,
       ));
     }
@@ -50,7 +52,7 @@ class CardSlider<T> extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      title.tr,
+                      title,
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium!
@@ -75,7 +77,8 @@ class CardSlider<T> extends StatelessWidget {
                   options: CarouselOptions(
                       height: itemHeight * columnItemNum,
                       enableInfiniteScroll: false,
-                      // viewportFraction: 0.7,
+                      // aspectRatio: 0.5,
+                      viewportFraction: viewportFraction,
                       padEnds: false),
                   items: getItems(context),
                 )

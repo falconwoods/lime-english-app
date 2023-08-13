@@ -25,10 +25,10 @@ class _UpdatedItemData {
   }
 }
 
-class RecentlyUpdatedItem extends StatelessWidget {
+class RecentlyUpdatedEpisode extends StatelessWidget {
   late final _UpdatedItemData _data;
 
-  RecentlyUpdatedItem(dynamic data, {super.key}) {
+  RecentlyUpdatedEpisode(dynamic data, {super.key}) {
     _data = _UpdatedItemData.from(data);
   }
 

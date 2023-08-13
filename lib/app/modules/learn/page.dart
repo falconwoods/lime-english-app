@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lime_english/app/modules/learn/controller.dart';
+import 'package:lime_english/app/modules/learn/widgets/hot_program.dart';
 import 'package:lime_english/app/widgets/card_slider.dart';
-import 'package:lime_english/app/modules/learn/widgets/recent_update_item.dart';
+import 'package:lime_english/app/modules/learn/widgets/recently_updated_episode.dart';
 
 class LearnPage extends GetView<LearnController> {
   const LearnPage({super.key});
@@ -20,16 +19,32 @@ class LearnPage extends GetView<LearnController> {
       child: Column(
         children: [
           Obx(() => CardSlider(
-              'Recent Update',
+              'Hot Program'.tr,
+              controller.hotPrograms.value,
+              2,
+              130,
+              0.35,
+              (context, data) => Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: HotProgram(data),
+                  ),
+              (itemData) => print(itemData),
+              () => {})),
+          SizedBox(
+            height: 20,
+          ),
+          Obx(() => CardSlider(
+              'Recent Update'.tr,
               controller.recentUpdates.value,
               3,
               60.0,
+              0.8,
               (context, data) => Padding(
                     padding: const EdgeInsets.only(top: 10),
-                    child: RecentlyUpdatedItem(data),
+                    child: RecentlyUpdatedEpisode(data),
                   ),
               (itemData) => print(itemData),
-              () => {}))
+              () => {})),
         ],
       ),
     )));
