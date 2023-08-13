@@ -27,7 +27,7 @@ void main() async {
   await Get.putAsync(() => AuthService().init());
 
   // TODO: update theme when it changed
-  AppUI.setThemeData(lightTheme);
+  AppUI.setThemeData(appLightTheme);
 
   runApp(GetMaterialApp(
     locale: Get.deviceLocale,
@@ -36,7 +36,7 @@ void main() async {
     initialBinding: HomeBinding(),
     initialRoute: Routes.HOME,
     getPages: AppPages.pages,
-    theme: lightTheme,
+    theme: appLightTheme,
     darkTheme: ThemeData.dark(),
     themeMode: ThemeMode.light,
     debugShowCheckedModeBanner: false,

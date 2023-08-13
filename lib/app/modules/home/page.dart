@@ -9,7 +9,7 @@ import 'package:lime_english/app/modules/review/page.dart';
 
 class HomePage extends GetView<HomeController> {
   final List<Widget> _pages = [
-    const LearnPage(),
+    LearnPage(),
     const ReviewPage(),
     const QuizPage(),
     const MyPage(),
