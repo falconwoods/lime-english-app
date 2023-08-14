@@ -1,4 +1,4 @@
-import 'package:lime_english/app/modules/login/pages/login_controller.dart';
+import 'package:lime_english/app/modules/login/controller.dart';
 import 'package:get/get.dart';
 
 class LoginBinding implements Bindings {

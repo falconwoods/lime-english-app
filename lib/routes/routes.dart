@@ -10,4 +10,6 @@ abstract class Routes {
   static const REVIEW = '/review';
   static const QUIZ = '/quiz';
   static const MY = '/my';
+  static const EPISODE = '/episode';
+  static const PROGRAM = '/program';
 }

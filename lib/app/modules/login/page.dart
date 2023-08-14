@@ -1,11 +1,11 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:lime_english/app/modules/login/pages/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lime_english/app/modules/login/controller.dart';
 import 'package:lime_english/app/modules/login/widgets/login_option.dart';
 import 'package:lime_english/routes/pages.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
 
   @override

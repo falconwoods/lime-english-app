@@ -1,3 +1,5 @@
+import 'package:lime_english/app/modules/episode/binding.dart';
+import 'package:lime_english/app/modules/episode/page.dart';
 import 'package:lime_english/app/modules/home/binding.dart';
 import 'package:lime_english/app/modules/home/page.dart';
 import 'package:lime_english/app/modules/login/binding.dart';
@@ -16,5 +18,9 @@ abstract class AppPages {
         bindings: [LoginBinding()]),
     GetPage(
         name: Routes.HOME, page: () => HomePage(), bindings: [HomeBinding()]),
+    GetPage(
+        name: Routes.EPISODE,
+        page: () => EpisodePage(),
+        bindings: [EpisodeBinding()]),
   ];
 }
