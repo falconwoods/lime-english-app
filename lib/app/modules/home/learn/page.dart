@@ -44,7 +44,8 @@ class LearnPage extends GetView<LearnController> {
                     padding: const EdgeInsets.only(top: 10),
                     child: RecentlyUpdatedEpisode(data),
                   ),
-              (itemData) => Get.toNamed(Routes.EPISODE),
+              (itemData) =>
+                  Get.toNamed(Routes.EPISODE, arguments: itemData['episodeId']),
               () => {})),
           SizedBox(
             height: 15,

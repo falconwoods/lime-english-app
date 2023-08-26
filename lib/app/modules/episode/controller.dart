@@ -9,11 +9,14 @@ class EpisodeController extends GetxController
     with GetSingleTickerProviderStateMixin {
   AppConfigService? config;
   late final AuthService auth;
+  late final int episodeId;
 
   @override
   void onInit() async {
     config = Get.find<AppConfigService>();
     auth = Get.find<AuthService>();
+    episodeId = Get.arguments as int;
+    Get.log('episodeId: $episodeId');
     super.onInit();
   }
 

@@ -3,33 +3,33 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lime_english/core/utils/extensions/color_extensions.dart';
 import 'package:lime_english/core/utils/extensions/integer_extensions.dart';
 
-class _UpdatedItemData {
-  late final String name;
-  late final String program;
-  late final String type;
+class _UpdatedEpisodeData {
+  late final String episodeName;
+  late final String programName;
+  late final String episodeType;
   late final String duration;
-  late final int itemId;
-  late final String itemIcon;
+  late final int episodeId;
+  late final String episodeIcon;
 
-  _UpdatedItemData(dynamic arg) {
-    name = arg['name'];
-    program = arg['program'];
-    type = arg['type'];
+  _UpdatedEpisodeData(dynamic arg) {
+    episodeName = arg['episodeName'];
+    episodeId = arg['episodeId'];
+    episodeType = arg['episodeType'];
+    episodeIcon = arg['episodeIcon'];
     duration = (arg['duration'] as int).toMMSS();
-    itemId = arg['itemId'];
-    itemIcon = arg['itemIcon'];
+    programName = arg['programName'];
   }
 
-  factory _UpdatedItemData.from(dynamic arg) {
-    return _UpdatedItemData(arg);
+  factory _UpdatedEpisodeData.from(dynamic arg) {
+    return _UpdatedEpisodeData(arg);
   }
 }
 
 class RecentlyUpdatedEpisode extends StatelessWidget {
-  late final _UpdatedItemData _data;
+  late final _UpdatedEpisodeData _data;
 
   RecentlyUpdatedEpisode(dynamic data, {super.key}) {
-    _data = _UpdatedItemData.from(data);
+    _data = _UpdatedEpisodeData.from(data);
   }
 
   getIcon() => Container(
@@ -41,7 +41,7 @@ class RecentlyUpdatedEpisode extends StatelessWidget {
             fit: StackFit.expand,
             children: [
               Image(
-                image: Image.network(_data.itemIcon).image,
+                image: Image.network(_data.episodeIcon).image,
                 fit: BoxFit.cover,
               ),
               // Positioned(
@@ -56,7 +56,8 @@ class RecentlyUpdatedEpisode extends StatelessWidget {
     return Container(
       width: 200,
       // color: Colors.red,
-      child: Text(_data.name, overflow: TextOverflow.ellipsis, softWrap: true),
+      child: Text(_data.episodeName,
+          overflow: TextOverflow.ellipsis, softWrap: true),
     );
   }
 
@@ -65,7 +66,7 @@ class RecentlyUpdatedEpisode extends StatelessWidget {
         // color: Colors.yellow,
         child: Row(children: [
           Text(
-            _data.program,
+            _data.programName,
             style: TextStyle(
                 fontSize: 10,
                 color:

@@ -59,97 +59,92 @@ class FakeData {
     var random = Random();
     final arrData = [
       {
-        'name': '植物细胞与激素 Plant cells and aaaaaaaaaa',
-        'program': 'Ted',
-        'type': 'video',
+        'episodeName': '植物细胞与激素 Plant cells and aaaaaaaaaa',
+        'episodeId': 1,
+        "episodeIcon":
+            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100',
+        'episodeType': 'video',
         'duration': 200,
-        'itemId': 1,
-        "itemIcon":
-            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100'
+        'programName': 'Ted',
       },
       {
-        'name': '植物细胞与激素 Plant cells and aaaaaaaaaa',
-        'program': 'Ted',
-        'type': 'video',
+        'episodeName': '植物细胞与激素 Plant cells and aaaaaaaaaa',
+        'episodeId': 1,
+        "episodeIcon":
+            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100',
+        'episodeType': 'video',
         'duration': 200,
-        'itemId': 1,
-        "itemIcon":
-            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100'
+        'programName': 'Ted',
       },
       {
-        'name': '植物细胞与激素 Plant cells and aaaaaaaaaa',
-        'program': 'Ted',
-        'type': 'video',
+        'episodeName': '植物细胞与激素 Plant cells and aaaaaaaaaa',
+        'episodeId': 1,
+        "episodeIcon":
+            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100',
+        'episodeType': 'video',
         'duration': 200,
-        'itemId': 1,
-        "itemIcon":
-            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100'
+        'programName': 'Ted',
       },
       {
-        'name': '植物细胞与激素 Plant cells and aaaaaaaaaa',
-        'program': 'Ted',
-        'type': 'video',
+        'episodeName': '植物细胞与激素 Plant cells and aaaaaaaaaa',
+        'episodeId': 1,
+        "episodeIcon":
+            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100',
+        'episodeType': 'video',
         'duration': 200,
-        'itemId': 1,
-        "itemIcon":
-            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100'
+        'programName': 'Ted',
       },
       {
-        'name': '植物细胞与激素 Plant cells and aaaaaaaaaa',
-        'program': 'Ted',
-        'type': 'video',
+        'episodeName': '植物细胞与激素 Plant cells and aaaaaaaaaa',
+        'episodeId': 1,
+        "episodeIcon":
+            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100',
+        'episodeType': 'video',
         'duration': 200,
-        'itemId': 1,
-        "itemIcon":
-            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100'
+        'programName': 'Ted',
       },
       {
-        'name': '植物细胞与激素 Plant cells and aaaaaaaaaa',
-        'program': 'Ted',
-        'type': 'video',
+        'episodeName': '植物细胞与激素 Plant cells and aaaaaaaaaa',
+        'episodeId': 1,
+        "episodeIcon":
+            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100',
+        'episodeType': 'video',
         'duration': 200,
-        'itemId': 1,
-        "itemIcon":
-            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100'
+        'programName': 'Ted',
       },
       {
-        'name': '植物细胞与激素 Plant cells and aaaaaaaaaa',
-        'program': 'Ted',
-        'type': 'video',
+        'episodeName': '植物细胞与激素 Plant cells and aaaaaaaaaa',
+        'episodeId': 1,
+        "episodeIcon":
+            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100',
+        'episodeType': 'video',
         'duration': 200,
-        'itemId': 1,
-        "itemIcon":
-            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100'
+        'programName': 'Ted',
       },
       {
-        'name': '植物细胞与激素 Plant cells and aaaaaaaaaa',
-        'program': 'Ted',
-        'type': 'video',
+        'episodeName': '植物细胞与激素 Plant cells and aaaaaaaaaa',
+        'episodeId': 1,
+        "episodeIcon":
+            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100',
+        'episodeType': 'video',
         'duration': 200,
-        'itemId': 1,
-        "itemIcon":
-            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100'
-      },
-      {
-        'name': '植物细胞与激素 Plant cells and aaaaaaaaaa',
-        'program': 'Ted',
-        'type': 'video',
-        'duration': 200,
-        'itemId': 1,
-        "itemIcon":
-            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100'
-      },
-      {
-        'name': '植物细胞与激素 Plant cells and aaaaaaaaaa',
-        'program': 'Ted',
-        'type': 'video',
-        'duration': 200,
-        'itemId': 1,
-        "itemIcon":
-            'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100'
+        'programName': 'Ted',
       },
     ];
 
     return arrData;
+  }
+
+  static getEpisode(int episodeId) {
+    var random = Random(100);
+    return {
+      'episodeName': '植物细胞与激素 Plant cells and aaaaaaaaaa',
+      'episodeId': 1,
+      "episodeIcon":
+          'https://picsum.photos/seed/${random.nextInt(1000000).toString()}/100/100',
+      'episodeType': 'video',
+      'duration': 200,
+      'languages': ['']
+    };
   }
 }
