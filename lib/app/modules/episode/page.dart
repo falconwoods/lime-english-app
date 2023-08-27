@@ -2,6 +2,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lime_english/app/modules/episode/controller.dart';
+import 'package:lime_english/app/modules/episode/widgets/listening/listening.dart';
+import 'package:lime_english/app/modules/episode/widgets/listening/listening_arg.dart';
 import 'package:lime_english/app/modules/login/widgets/login_option.dart';
 import 'package:lime_english/routes/pages.dart';
 
@@ -59,7 +61,7 @@ class EpisodePage extends GetView<EpisodeController> {
         children: [
           for (final tab in tabs)
             Center(
-              child: Text(tab),
+              child: Listening(ListeningTextArg()),
             ),
         ],
       ),

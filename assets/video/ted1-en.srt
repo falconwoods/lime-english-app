@@ -1,0 +1,426 @@
+1
+00:00:07,004 --> 00:00:09,673
+Standing at almost 84 meters tall,
+
+2
+00:00:09,675 --> 00:00:13,675
+this is the largest known living tree
+on the planet.
+
+3
+00:00:13,675 --> 00:00:15,285
+Nicknamed General Sherman,
+
+4
+00:00:15,285 --> 00:00:22,267
+this giant sequoia has sequestered
+roughly 1,400 tons of atmospheric carbon
+
+5
+00:00:22,268 --> 00:00:26,888
+over its estimated 2,500 years on earth.
+
+6
+00:00:26,888 --> 00:00:30,718
+Very few trees can compete 
+with this carbon impact,
+
+7
+00:00:30,718 --> 00:00:37,009
+but today, humanity produces more 
+than 1,400 tons of carbon every minute.
+
+8
+00:00:37,009 --> 00:00:38,709
+To combat climate change,
+
+9
+00:00:38,709 --> 00:00:42,249
+we need to steeply reduce 
+fossil fuel emissions,
+
+10
+00:00:42,249 --> 00:00:47,106
+and draw down excess CO2 
+to restore our atmosphere’s balance
+
+11
+00:00:47,106 --> 00:00:49,195
+of greenhouse gases.
+
+12
+00:00:49,195 --> 00:00:52,025
+But what can trees do to help
+in this fight?
+
+13
+00:00:52,026 --> 00:00:55,585
+And how do they sequester carbon 
+in the first place?
+
+14
+00:00:55,585 --> 00:00:59,114
+Like all plants, trees consume
+atmospheric carbon
+
+15
+00:00:59,115 --> 00:01:02,085
+through a chemical reaction 
+called photosynthesis.
+
+16
+00:01:02,085 --> 00:01:04,725
+This process uses energy 
+from sunlight
+
+17
+00:01:04,725 --> 00:01:08,265
+to convert water and carbon dioxide 
+into oxygen
+
+18
+00:01:08,266 --> 00:01:11,055
+and energy-storing carbohydrates.
+
+19
+00:01:11,055 --> 00:01:15,055
+Plants then consume 
+these carbohydrates in a reverse process
+
+20
+00:01:15,055 --> 00:01:17,874
+called respiration, 
+converting them to energy
+
+21
+00:01:17,876 --> 00:01:21,165
+and releasing carbon 
+back into the atmosphere.
+
+22
+00:01:21,165 --> 00:01:25,379
+In trees, however, a large portion
+of that carbon isn’t released,
+
+23
+00:01:25,381 --> 00:01:29,716
+and instead, is stored 
+as newly formed wood tissue.
+
+24
+00:01:29,716 --> 00:01:33,575
+During their lifetimes, 
+trees act as carbon vaults,
+
+25
+00:01:33,576 --> 00:01:38,055
+and they continue to draw down carbon 
+for as long as they grow.
+
+26
+00:01:38,055 --> 00:01:41,035
+However, when a tree dies
+and decays,
+
+27
+00:01:41,036 --> 00:01:44,495
+some of its carbon will be released
+back into the air.
+
+28
+00:01:44,495 --> 00:01:48,175
+A significant amount of CO2
+is stored in the soil,
+
+29
+00:01:48,176 --> 00:01:50,736
+where it can remain 
+for thousands of years.
+
+30
+00:01:50,736 --> 00:01:55,766
+But eventually, that carbon
+also seeps back into the atmosphere.
+
+31
+00:01:55,766 --> 00:01:58,795
+So if trees are going to help 
+fight a long-term problem
+
+32
+00:01:58,796 --> 00:01:59,846
+like climate change,
+
+33
+00:01:59,846 --> 00:02:02,453
+they need to survive to sequester 
+their carbon
+
+34
+00:02:02,453 --> 00:02:07,542
+for the longest period possible, 
+while also reproducing quickly.
+
+35
+00:02:07,543 --> 00:02:11,672
+Is there one type of tree 
+we could plant that meets these criteria?
+
+36
+00:02:11,674 --> 00:02:16,212
+Some fast growing, long-lived, 
+super sequestering species
+
+37
+00:02:16,212 --> 00:02:18,312
+we could scatter worldwide?
+
+38
+00:02:18,312 --> 00:02:19,922
+Not that we know of.
+
+39
+00:02:19,923 --> 00:02:21,923
+But even if such a tree existed,
+
+40
+00:02:21,923 --> 00:02:24,893
+it wouldn’t be a good 
+long-term solution.
+
+41
+00:02:24,893 --> 00:02:28,252
+Forests are complex networks 
+of living organisms,
+
+42
+00:02:28,252 --> 00:02:32,753
+and there’s no one species 
+that can thrive in every ecosystem.
+
+43
+00:02:32,753 --> 00:02:37,132
+The most sustainable trees to plant 
+are always native ones;
+
+44
+00:02:37,143 --> 00:02:41,143
+species that already play a role 
+in their local environment.
+
+45
+00:02:41,143 --> 00:02:43,508
+Preliminary research shows 
+that ecosystems
+
+46
+00:02:43,508 --> 00:02:47,407
+with a naturally occurring diversity
+of trees have less competition
+
+47
+00:02:47,407 --> 00:02:51,246
+for resources and better resist
+climate change.
+
+48
+00:02:51,247 --> 00:02:54,646
+This means we can’t just plant trees 
+to draw down carbon;
+
+49
+00:02:54,647 --> 00:02:58,337
+we need to restore depleted ecosystems.
+
+50
+00:02:58,337 --> 00:03:01,027
+There are numerous regions
+that have been clear cut
+
+51
+00:03:01,027 --> 00:03:04,377
+or developed that are ripe for restoring.
+
+52
+00:03:04,377 --> 00:03:08,321
+In 2019, a study led 
+by Zurich’s Crowtherlab
+
+53
+00:03:08,322 --> 00:03:12,981
+analyzed satellite imagery 
+of the world’s existing tree cover.
+
+54
+00:03:12,981 --> 00:03:15,671
+By combining it with climate and soil data
+
+55
+00:03:15,671 --> 00:03:19,010
+and excluding areas necessary
+for human use,
+
+56
+00:03:19,012 --> 00:03:20,961
+they determined Earth could support
+
+57
+00:03:20,961 --> 00:03:24,831
+nearly one billion hectares 
+of additional forest.
+
+58
+00:03:24,831 --> 00:03:29,032
+That’s roughly 1.2 trillion trees.
+
+59
+00:03:29,033 --> 00:03:32,763
+This staggering number surprised
+the scientific community,
+
+60
+00:03:32,764 --> 00:03:34,643
+prompting additional research.
+
+61
+00:03:34,644 --> 00:03:39,187
+Scientists now cite a more conservative 
+but still remarkable figure.
+
+62
+00:03:39,187 --> 00:03:43,347
+By their revised estimates,
+these restored ecosystems
+
+63
+00:03:43,348 --> 00:03:48,932
+could capture anywhere from 100 to 200
+billion tons of carbon,
+
+64
+00:03:48,932 --> 00:03:53,372
+accounting for over one-sixth
+of humanity’s carbon emissions.
+
+65
+00:03:53,372 --> 00:03:55,662
+More than half of the potential
+forest canopy
+
+66
+00:03:55,663 --> 00:04:00,092
+for new restoration efforts 
+can be found in just six countries.
+
+67
+00:04:00,092 --> 00:04:04,922
+And the study can also provide insight
+into existing restoration projects,
+
+68
+00:04:04,923 --> 00:04:06,402
+like The Bonn Challenge,
+
+69
+00:04:06,402 --> 00:04:12,025
+which aims to restore 350 million hectares
+of forest by 2030.
+
+70
+00:04:12,026 --> 00:04:14,555
+But this is where it gets complicated.
+
+71
+00:04:14,556 --> 00:04:17,056
+Ecosystems are incredibly complex,
+
+72
+00:04:17,057 --> 00:04:21,510
+and it’s unclear whether they’re best 
+restored by human intervention.
+
+73
+00:04:21,511 --> 00:04:24,980
+It’s possible the right thing 
+to do for certain areas
+
+74
+00:04:24,980 --> 00:04:27,600
+is to simply leave them alone.
+
+75
+00:04:27,600 --> 00:04:31,419
+Additionally, some researchers
+worry that restoring forests
+
+76
+00:04:31,420 --> 00:04:34,859
+on this scale may have unintended 
+consequences,
+
+77
+00:04:34,860 --> 00:04:37,179
+like producing natural bio-chemicals
+
+78
+00:04:37,180 --> 00:04:41,454
+at a pace that could actually 
+accelerate climate change.
+
+79
+00:04:41,454 --> 00:04:44,654
+And even if we succeed 
+in restoring these areas,
+
+80
+00:04:44,654 --> 00:04:47,314
+future generations would need
+to protect them
+
+81
+00:04:47,314 --> 00:04:52,384
+from the natural and economic forces
+that previously depleted them.
+
+82
+00:04:52,386 --> 00:04:55,930
+Taken together, these challenges
+have damaged confidence
+
+83
+00:04:55,930 --> 00:04:58,610
+in restoration projects worldwide.
+
+84
+00:04:58,610 --> 00:05:01,639
+And the complexity 
+of rebuilding ecosystems
+
+85
+00:05:01,639 --> 00:05:06,166
+demonstrates how important 
+it is to protect our existing forests.
+
+86
+00:05:06,168 --> 00:05:09,658
+But hopefully, restoring 
+some of these depleted regions
+
+87
+00:05:09,658 --> 00:05:13,737
+will give us the data and conviction 
+necessary to combat climate change
+
+88
+00:05:13,737 --> 00:05:15,826
+on a larger scale.
+
+89
+00:05:15,827 --> 00:05:19,931
+If we get it right, maybe these modern
+trees will have time to grow
+
+90
+00:05:19,932 --> 00:05:22,246
+into carbon carrying titans.
+

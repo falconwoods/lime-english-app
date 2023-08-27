@@ -39,3 +39,6 @@ flutter:
     - .env
     - assets/translations/zh_CN.json
     - assets/images/1.jpg
+    - assets/video/ted1.mp4
+    - assets/video/ted1-en.srt
+    - assets/video/ted1-cn.srt

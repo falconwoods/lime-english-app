@@ -1,6 +1,7 @@
 import 'package:lime_english/app/data/app_translations.dart';
 import 'package:lime_english/app/data/services/config_service.dart';
 import 'package:lime_english/app/data/services/auth_service.dart';
+import 'package:lime_english/app/data/services/download_service.dart';
 import 'package:lime_english/app/modules/home/binding.dart';
 import 'package:lime_english/app/modules/login/binding.dart';
 import 'package:lime_english/core/theme/light_theme.dart';
@@ -25,6 +26,7 @@ void main() async {
   // register dependencies
   await Get.putAsync(() => AppConfigService().init());
   await Get.putAsync(() => AuthService().init());
+  await Get.putAsync(() => DownloadService().init());
 
   // TODO: update theme when it changed
   AppUI.setThemeData(appLightTheme);
