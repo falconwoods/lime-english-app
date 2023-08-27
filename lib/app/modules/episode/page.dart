@@ -57,10 +57,12 @@ class EpisodePage extends GetView<EpisodeController> {
         ],
       ),
       body: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
         controller: _tabCtrl,
         children: [
           for (final tab in tabs)
-            Center(
+            Padding(
+              padding: EdgeInsets.all(4),
               child: Listening(ListeningTextArg()),
             ),
         ],

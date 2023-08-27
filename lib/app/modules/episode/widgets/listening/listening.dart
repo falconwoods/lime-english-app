@@ -21,6 +21,7 @@ class Listening extends GetView<ListeningController> {
 
     return SingleChildScrollView(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           AppVideoPlayer(AppVideoPlayerArg(
               'assets/video/ted1.mp4', AppVideoSourceType.asset,

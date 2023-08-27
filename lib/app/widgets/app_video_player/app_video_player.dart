@@ -10,14 +10,12 @@ class AppVideoPlayer extends GetView<AppVideoPlayerController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(AppVideoPlayerController()).setArg(arg);
+    Get.put(AppVideoPlayerController(arg));
 
     return Obx(() {
-      if (controller.videoCtl.value == null) return Container();
-
       return AspectRatio(
-        aspectRatio: controller.videoCtl.value!.value.aspectRatio,
-        child: VideoPlayer(controller.videoCtl.value!),
+        aspectRatio: controller.aspectRatio.value,
+        child: VideoPlayer(controller.videoCtl),
       );
     });
   }
