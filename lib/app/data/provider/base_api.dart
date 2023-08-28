@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:lime_english/app/data/models/api_res.dart';
-import 'package:lime_english/app/data/services/config_service.dart';
+import 'package:lime_english/app/services/config_service.dart';
 import 'package:lime_english/core/utils/app_log.dart';
 import 'package:lime_english/core/values/env.dart';
 

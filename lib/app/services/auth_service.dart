@@ -2,7 +2,7 @@ import 'package:lime_english/app/data/models/api_res.dart';
 import 'package:lime_english/app/data/models/user.dart';
 import 'package:lime_english/app/data/provider/app_api.dart';
 import 'package:get/get.dart';
-import 'package:lime_english/app/data/services/config_service.dart';
+import 'package:lime_english/app/services/config_service.dart';
 import 'package:lime_english/core/values/consts.dart';
 
 class AuthService extends GetxService {

@@ -1,7 +1,7 @@
 import 'package:lime_english/app/data/app_translations.dart';
-import 'package:lime_english/app/data/services/config_service.dart';
-import 'package:lime_english/app/data/services/auth_service.dart';
-import 'package:lime_english/app/data/services/download_service.dart';
+import 'package:lime_english/app/services/config_service.dart';
+import 'package:lime_english/app/services/auth_service.dart';
+import 'package:lime_english/app/services/download_service.dart';
 import 'package:lime_english/app/modules/home/binding.dart';
 import 'package:lime_english/app/modules/login/binding.dart';
 import 'package:lime_english/core/theme/light_theme.dart';

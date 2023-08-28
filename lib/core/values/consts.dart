@@ -3,6 +3,8 @@
 // key for storage
 const DARK_MODE = 'dark_mode';
 const USER_TOKEN = 'user_token';
+const CUR_PLAYING_PROGRAM = 'cur_playing_program';
+const CUR_PLAYING_EPISODE = 'cur_playing_episode';
 
 // key for api
 const API_LOGIN = '/login';

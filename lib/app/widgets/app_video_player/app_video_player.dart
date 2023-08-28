@@ -6,6 +6,7 @@ import 'package:video_player/video_player.dart';
 
 class AppVideoPlayer extends GetView<AppVideoPlayerController> {
   final AppVideoPlayerArg arg;
+
   const AppVideoPlayer(this.arg, {Key? key}) : super(key: key);
 
   @override
