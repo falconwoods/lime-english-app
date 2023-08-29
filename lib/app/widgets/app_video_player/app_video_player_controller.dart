@@ -14,9 +14,9 @@ class AppVideoPlayerController extends GetxController {
 
   @override
   void onInit() {
-    if (arg.srcType == AppVideoSourceType.url) {
+    if (arg.src.startsWith('http')) {
       videoCtl = VideoPlayerController.networkUrl(Uri.parse(arg.src));
-    } else if (arg.srcType == AppVideoSourceType.asset) {
+    } else if (arg.src.startsWith('assets/')) {
       videoCtl = VideoPlayerController.asset(arg.src);
     } else {
       videoCtl = VideoPlayerController.file(File(arg.src));

@@ -7,10 +7,11 @@ import 'package:get/get.dart';
 class Subtitle {
   late List<SubtitleEntry> _entries;
 
-  Future<void> loadFromFile(String filePath) async {
+  Future<Subtitle> loadFromFile(String filePath) async {
     final file = File(filePath);
     final lines = await file.readAsLines();
     _entries = parseEntries(lines);
+    return this;
   }
 
   SubtitleEntry getSubtitle(Duration duration) {
@@ -19,6 +20,10 @@ class Subtitle {
       orElse: () => SubtitleEntry(0, Duration.zero, Duration.zero, ''),
     );
     return matchingEntry;
+  }
+
+  SubtitleEntry getLine(int index) {
+    return _entries[index];
   }
 
   SubtitleEntry getPreLine(Duration duration) {
@@ -89,6 +94,10 @@ class Subtitle {
 
   bool isEmpty() {
     return _entries.isEmpty;
+  }
+
+  int get length {
+    return _entries.length;
   }
 }
 

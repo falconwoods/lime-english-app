@@ -3,22 +3,32 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 
-class DownloadService extends GetxService {
+class FileService extends GetxService {
   final Dio _dio = Dio();
 
-  Future<DownloadService> init() async {
+  static String getFileType(String path) {
+    if (path.endsWith('.mp3')) {
+      return 'audio';
+    } else if (path.endsWith('.mp4')) {
+      return 'video';
+    } else if (path.endsWith('.srt')) {
+      return 'subtitle';
+    } else {
+      return 'other';
+    }
+  }
+
+  Future<FileService> init() async {
     return this;
   }
 
-  Future<String?> downloadVideo(String url) async {
-    return download(url, 'video');
+  // download file and return local file path
+  Future<String> download(String url) async {
+    String ft = getFileType(url);
+    return _download(url, ft);
   }
 
-  Future<String?> downloadSubtitle(String url) async {
-    return download(url, 'subtitle');
-  }
-
-  Future<String?> download(String url, subfolders) async {
+  Future<String> _download(String url, subfolders) async {
     try {
       final docDir = await getApplicationDocumentsDirectory();
       String appDirPath = docDir.path;
@@ -46,7 +56,7 @@ class DownloadService extends GetxService {
       return filePath;
     } catch (e) {
       Get.log(e.toString(), isError: true);
-      return null;
+      throw Exception(e.toString());
     }
   }
 }

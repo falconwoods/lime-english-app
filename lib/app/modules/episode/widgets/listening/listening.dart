@@ -8,7 +8,7 @@ import 'package:lime_english/app/widgets/app_video_player/app_video_player_arg.d
 import 'package:video_player/video_player.dart';
 
 class Listening extends GetView<ListeningController> {
-  final ListeningTextArg arg;
+  final ListeningArg arg;
   const Listening(this.arg, {Key? key}) : super(key: key);
 
   void onVideoUpdate(VideoPlayerValue value) {
@@ -17,18 +17,29 @@ class Listening extends GetView<ListeningController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ListeningController());
+    Get.put(ListeningController(arg));
 
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          AppVideoPlayer(AppVideoPlayerArg(
-              'assets/video/ted1.mp4', AppVideoSourceType.asset,
-              onUpdate: onVideoUpdate)),
-          ListeningText(null)
-        ],
-      ),
-    );
+    return FutureBuilder<void>(
+        future: controller.initFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  AppVideoPlayer(AppVideoPlayerArg('assets/video/ted1.mp4',
+                      onUpdate: onVideoUpdate)),
+                  ListeningText()
+                ],
+              ),
+            );
+          }
+        });
   }
 }
