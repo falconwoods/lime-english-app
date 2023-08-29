@@ -12,7 +12,8 @@ class Listening extends GetView<ListeningController> {
   const Listening(this.arg, {Key? key}) : super(key: key);
 
   void onVideoUpdate(VideoPlayerValue value) {
-    print(value.position);
+    var se = controller.primarySubtitle.getSubtitle(value.position);
+    controller.curSubtitleIndex.value = se.index;
   }
 
   @override
@@ -27,7 +28,7 @@ class Listening extends GetView<ListeningController> {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
+            return Center(child: Text('Error: ${snapshot.error}'));
           } else {
             return SingleChildScrollView(
               child: Column(

@@ -10,6 +10,7 @@ class ListeningController extends GetxController {
   final isDownloading = false.obs;
   final _mediaPath = ''.obs;
   final Rx<SubtitleOption> subtitleOption = SubtitleOption.all.obs;
+  final Rx<int> curSubtitleIndex = 0.obs;
   // final Rx<Map<String, Subtitle>> _subtitles = Rx<Map<String, Subtitle>>({});
   late final Subtitle primarySubtitle;
   late final Subtitle secondarySubtitle;
