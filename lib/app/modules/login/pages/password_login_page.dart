@@ -4,7 +4,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 import 'package:lime_english/app/modules/login/controller.dart';
 import 'package:lime_english/core/utils/form_validator.dart';
-import 'package:lime_english/routes/pages.dart';
+import 'package:lime_english/routes/app_pages.dart';
 
 class PasswordLoginPage extends GetView<LoginController> {
   final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();

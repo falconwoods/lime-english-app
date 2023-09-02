@@ -4,7 +4,7 @@ import 'package:lime_english/app/modules/home/learn/controller.dart';
 import 'package:lime_english/app/modules/home/learn/widgets/hot_program.dart';
 import 'package:lime_english/app/widgets/card_slider.dart';
 import 'package:lime_english/app/modules/home/learn/widgets/recently_updated_episode.dart';
-import 'package:lime_english/routes/pages.dart';
+import 'package:lime_english/routes/app_pages.dart';
 
 class LearnPage extends GetView<LearnController> {
   const LearnPage({super.key});

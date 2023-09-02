@@ -7,7 +7,7 @@ import 'package:lime_english/app/modules/home/binding.dart';
 import 'package:lime_english/app/modules/login/binding.dart';
 import 'package:lime_english/core/theme/light_theme.dart';
 import 'package:lime_english/core/utils/app_ui.dart';
-import 'package:lime_english/routes/pages.dart';
+import 'package:lime_english/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

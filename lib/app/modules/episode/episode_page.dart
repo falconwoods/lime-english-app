@@ -5,7 +5,7 @@ import 'package:lime_english/app/modules/episode/controller.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening/listening.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening/listening_arg.dart';
 import 'package:lime_english/app/modules/login/widgets/login_option.dart';
-import 'package:lime_english/routes/pages.dart';
+import 'package:lime_english/routes/app_pages.dart';
 
 class EpisodePage extends GetView<EpisodeController> {
   late final TabController _tabCtrl;

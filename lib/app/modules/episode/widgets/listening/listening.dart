@@ -34,7 +34,7 @@ class Listening extends GetView<ListeningController> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  AppVideoPlayer(AppVideoPlayerArg('assets/video/ted1.mp4',
+                  AppVideoPlayer(AppVideoPlayerArg(controller.mediaPath.value,
                       onUpdate: onVideoUpdate)),
                   ListeningText()
                 ],

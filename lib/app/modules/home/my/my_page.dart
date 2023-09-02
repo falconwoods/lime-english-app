@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lime_english/app/modules/home/my/controller.dart';
-import 'package:lime_english/routes/pages.dart';
+import 'package:lime_english/routes/app_pages.dart';
 
 class MyPage extends GetView<MyController> {
   const MyPage({super.key});

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lime_english/app/modules/login/controller.dart';
 import 'package:lime_english/app/modules/login/widgets/login_option.dart';
-import 'package:lime_english/routes/pages.dart';
+import 'package:lime_english/routes/app_pages.dart';
 
 class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});

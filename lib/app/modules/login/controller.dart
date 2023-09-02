@@ -2,7 +2,7 @@ import 'package:lime_english/app/data/models/user.dart';
 import 'package:lime_english/app/services/config_service.dart';
 import 'package:lime_english/app/services/auth_service.dart';
 import 'package:lime_english/core/utils/functions/verify_response.dart';
-import 'package:lime_english/routes/pages.dart';
+import 'package:lime_english/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
