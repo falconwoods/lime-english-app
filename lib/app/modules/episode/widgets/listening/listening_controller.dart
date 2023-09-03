@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:lime_english/app/data/enum/subtitle_option.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening/listening_arg.dart';
 import 'package:lime_english/app/services/file_service.dart';
 import 'package:lime_english/app/services/player/Subtitle.dart';
+import 'package:video_player/video_player.dart';
 
 class ListeningController extends GetxController {
   late final ListeningArg arg;
@@ -14,6 +17,7 @@ class ListeningController extends GetxController {
   // final Rx<Map<String, Subtitle>> _subtitles = Rx<Map<String, Subtitle>>({});
   late final Subtitle primarySubtitle;
   late final Subtitle secondarySubtitle;
+  late final SubRipCaptionFile ps;
 
   ListeningController(this.arg);
 
@@ -33,13 +37,13 @@ class ListeningController extends GetxController {
     //   _subtitles.value[subtitle.key] = await Subtitle().loadFromFile(sp);
     // }
 
-    if (!arg.episode.subtitles.containsKey('en') ||
-        !arg.episode.subtitles.containsKey('cn')) {
-      throw 'Subtitles not found';
-    }
-    primarySubtitle =
-        await Subtitle().loadFromFile(arg.episode.subtitles['en']!);
-    primarySubtitle =
-        await Subtitle().loadFromFile(arg.episode.subtitles['cn']!);
+    primarySubtitle = await Subtitle()
+        .loadFromFile(await fs.download(arg.episode.subtitles['en']!));
+    secondarySubtitle = await Subtitle()
+        .loadFromFile(await fs.download(arg.episode.subtitles['cn']!));
+
+    var p = await fs.download(arg.episode.subtitles['en']!);
+    var f = File(p);
+    ps = SubRipCaptionFile(await f.readAsString());
   }
 }

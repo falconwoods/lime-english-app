@@ -15,11 +15,25 @@ class Subtitle {
   }
 
   SubtitleEntry getSubtitle(Duration duration) {
-    final matchingEntry = _entries.firstWhere(
-      (entry) => entry.start <= duration && entry.end >= duration,
-      orElse: () => SubtitleEntry(0, Duration.zero, Duration.zero, ''),
-    );
-    return matchingEntry;
+    SubtitleEntry? matchingEntry;
+
+    for (int i = 0; i < _entries.length; i++) {
+      if (duration >= _entries[i].start && duration <= _entries[i].end) {
+        // If the duration is within the current subtitle's time range, return it.
+        matchingEntry = _entries[i];
+        break;
+      } else if (duration < _entries[i].start) {
+        // If the duration is before the start of the current subtitle,
+        // return the previous subtitle as long as it's not the first one.
+        if (i > 0) {
+          matchingEntry = _entries[i - 1];
+        }
+        break;
+      }
+    }
+
+    // If no matching subtitle was found, you can return an empty or default subtitle entry.
+    return matchingEntry ?? SubtitleEntry(0, Duration.zero, Duration.zero, '');
   }
 
   SubtitleEntry getLine(int index) {

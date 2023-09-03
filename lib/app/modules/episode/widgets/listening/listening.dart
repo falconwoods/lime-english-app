@@ -11,9 +11,18 @@ class Listening extends GetView<ListeningController> {
   final ListeningArg arg;
   const Listening(this.arg, {Key? key}) : super(key: key);
 
-  void onVideoUpdate(VideoPlayerValue value) {
-    var se = controller.primarySubtitle.getSubtitle(value.position);
-    controller.curSubtitleIndex.value = se.index;
+  void onVideoUpdate(Duration position) {
+    var se = controller.primarySubtitle.getSubtitle(position);
+    controller.curSubtitleIndex.value = se.index - 1;
+    // Get.log('videoUpdate $position ${controller.curSubtitleIndex} ${se.text}');
+
+    for (final Caption caption in controller.ps.captions) {
+      if (caption.start <= position && caption.end >= position) {
+        controller.curSubtitleIndex.value = caption.number - 1;
+        Get.log('videoUpdate $position ${caption.number} ${caption.text}');
+        break;
+      }
+    }
   }
 
   @override

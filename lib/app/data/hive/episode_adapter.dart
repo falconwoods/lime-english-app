@@ -10,14 +10,16 @@ class EpisodeAdapter extends TypeAdapter<EpisodeRecord> {
   EpisodeRecord read(BinaryReader reader) {
     final episodeId = reader.readInt();
     final episodeTitle = reader.readString();
+    final mediaSrc = reader.readString();
     final subtitles = Map<String, String>.from(reader.readMap());
-    return EpisodeRecord(episodeId, episodeTitle, subtitles);
+    return EpisodeRecord(episodeId, episodeTitle, mediaSrc, subtitles);
   }
 
   @override
   void write(BinaryWriter writer, EpisodeRecord obj) {
     writer.writeInt(obj.episodeId);
     writer.writeString(obj.episodeTitle);
+    writer.writeString(obj.mediaSrc);
     writer.writeMap(obj.subtitles);
   }
 }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ class AppVideoPlayerController extends GetxController {
   late final Future<void>? initializeVideoPlayerFuture;
   late final AppVideoPlayerArg arg;
   RxDouble aspectRatio = (16.0 / 9).obs;
+  Timer? _timer;
 
   AppVideoPlayerController(this.arg);
 
@@ -23,8 +25,16 @@ class AppVideoPlayerController extends GetxController {
     }
 
     if (arg.onUpdate != null) {
-      videoCtl.addListener(() {
-        arg.onUpdate!(videoCtl.value);
+      // videoCtl.addListener(() {
+      //   arg.onUpdate!(videoCtl.value);
+      // });
+
+      _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) async {
+        if (isClosed == false) {
+          Duration? pos = await videoCtl.position;
+          pos = pos ?? Duration.zero;
+          arg.onUpdate!(pos);
+        }
       });
     }
 
@@ -39,6 +49,7 @@ class AppVideoPlayerController extends GetxController {
   @override
   void onClose() {
     videoCtl.dispose();
+    _timer?.cancel();
     super.onClose();
   }
 }

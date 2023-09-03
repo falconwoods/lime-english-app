@@ -3,7 +3,7 @@ import 'package:video_player/video_player.dart';
 
 class AppVideoPlayerArg {
   late final String src;
-  late final ValueChanged<VideoPlayerValue>? onUpdate;
+  late final ValueChanged<Duration>? onUpdate;
 
   AppVideoPlayerArg(this.src, {this.onUpdate});
 }

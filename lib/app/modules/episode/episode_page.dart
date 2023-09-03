@@ -1,11 +1,9 @@
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lime_english/app/data/hive/episode_record.dart';
 import 'package:lime_english/app/modules/episode/controller.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening/listening.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening/listening_arg.dart';
-import 'package:lime_english/app/modules/login/widgets/login_option.dart';
-import 'package:lime_english/routes/app_pages.dart';
 
 class EpisodePage extends GetView<EpisodeController> {
   late final TabController _tabCtrl;
@@ -44,27 +42,33 @@ class EpisodePage extends GetView<EpisodeController> {
         ),
         actions: [
           InkWell(
-            child: Icon(Icons.event_note_rounded),
             onTap: onNote,
+            child: const Icon(Icons.event_note_rounded),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           InkWell(
-            child: Icon(Icons.more_vert),
             onTap: onMore,
+            child: const Icon(Icons.more_vert),
           ),
         ],
       ),
       body: TabBarView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         controller: _tabCtrl,
         children: [
-          for (final tab in tabs)
-            Padding(
-              padding: EdgeInsets.all(4),
-              child: Listening(ListeningTextArg()),
-            ),
+          Padding(
+            padding: const EdgeInsets.all(4),
+            child: Listening(ListeningArg(
+                programId: 1,
+                episode: EpisodeRecord(
+                    1, 'Ted', 'http://router.gosolo.space:10000/ted2.mp4', {
+                  'cn': 'http://router.gosolo.space:10000/ted2-cn.srt',
+                  'en': 'http://router.gosolo.space:10000/ted2-en.srt'
+                }))),
+          ),
+          const Text('reading')
         ],
       ),
     );
