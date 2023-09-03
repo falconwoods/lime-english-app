@@ -4,6 +4,7 @@ import 'package:lime_english/app/data/hive/episode_record.dart';
 import 'package:lime_english/app/modules/episode/controller.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening/listening.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening/listening_arg.dart';
+import 'package:lime_english/app/modules/episode/widgets/player_panel/player_panel.dart';
 
 class EpisodePage extends GetView<EpisodeController> {
   late final TabController _tabCtrl;
@@ -27,9 +28,10 @@ class EpisodePage extends GetView<EpisodeController> {
             SliverAppBar(
               floating: false,
               pinned: false,
-              flexibleSpace: FlexibleSpaceBar(
-                title: Text('Scrolling App Bar'),
-              ),
+              // flexibleSpace: const FlexibleSpaceBar(
+              //   title: Text('Scrolling App Bar'),
+              // ),
+              // expandedHeight: 200,
               leading: IconButton(
                 icon: const Icon(
                   Icons.chevron_left,
@@ -80,6 +82,10 @@ class EpisodePage extends GetView<EpisodeController> {
             const Text('reading')
           ],
         ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        height: 60,
+        child: PlayerPanel(),
       ),
     );
   }

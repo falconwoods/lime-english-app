@@ -5,6 +5,7 @@ import 'package:lime_english/app/services/db_service.dart';
 import 'package:lime_english/app/services/file_service.dart';
 import 'package:lime_english/app/modules/home/binding.dart';
 import 'package:lime_english/app/modules/login/binding.dart';
+import 'package:lime_english/app/services/player/player_service.dart';
 import 'package:lime_english/core/theme/light_theme.dart';
 import 'package:lime_english/core/utils/app_ui.dart';
 import 'package:lime_english/routes/app_pages.dart';
@@ -29,6 +30,7 @@ void main() async {
   await Get.putAsync(() => AuthService().init());
   await Get.putAsync(() => FileService().init());
   await Get.putAsync(() => DBService().init());
+  await Get.putAsync(() => PlayerService().init());
 
   // TODO: update theme when it changed
   AppUI.setThemeData(appLightTheme);

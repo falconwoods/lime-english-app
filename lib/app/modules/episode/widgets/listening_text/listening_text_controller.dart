@@ -18,19 +18,19 @@ class ListeningTextController extends GetxController {
     for (var i = 0; i < lc.primarySubtitle.length; i++) {
       GlobalKey k = GlobalKey();
       blocks.add(ListeningTextBlock(
-          i,
-          lc.primarySubtitle.getLine(i).text,
-          lc.secondarySubtitle.getLine(i).text,
+          i + 1,
+          lc.primarySubtitle.getLine(i + 1).text,
+          lc.secondarySubtitle.getLine(i + 1).text,
           lc.subtitleOption,
-          lc.curSubtitleIndex,
+          lc.curSubSequence,
           key: k));
     }
 
-    ever(lc.curSubtitleIndex, (index) {
-      GlobalKey key = blocks[index].key as GlobalKey;
+    ever(lc.curSubSequence, (sequence) {
+      GlobalKey key = blocks[sequence - 1].key as GlobalKey;
       scrollCtl.position.ensureVisible(key.currentContext!.findRenderObject()!,
           duration: const Duration(milliseconds: 500), curve: Curves.ease);
-      Get.log('subIndex Updated: $index');
+      Get.log('subIndex Updated: $sequence');
     });
   }
 }

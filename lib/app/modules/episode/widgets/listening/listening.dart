@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lime_english/app/modules/episode/widgets/listening_text/listening_text.dart';
 import 'package:lime_english/app/widgets/app_video_player/app_video_player.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening/listening_arg.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening/listening_controller.dart';
-import 'package:lime_english/app/modules/episode/widgets/listening_text/listening_text.dart';
-import 'package:lime_english/app/widgets/app_video_player/app_video_player_arg.dart';
-import 'package:video_player/video_player.dart';
 
 class Listening extends GetView<ListeningController> {
   final ListeningArg arg;
@@ -13,16 +11,8 @@ class Listening extends GetView<ListeningController> {
 
   void onVideoUpdate(Duration position) {
     var se = controller.primarySubtitle.getSubtitle(position);
-    controller.curSubtitleIndex.value = se.index - 1;
+    controller.curSubSequence.value = se.sequence;
     // Get.log('videoUpdate $position ${controller.curSubtitleIndex} ${se.text}');
-
-    for (final Caption caption in controller.ps.captions) {
-      if (caption.start <= position && caption.end >= position) {
-        controller.curSubtitleIndex.value = caption.number - 1;
-        // Get.log('videoUpdate $position ${caption.number} ${caption.text}');
-        break;
-      }
-    }
   }
 
   @override
@@ -42,8 +32,7 @@ class Listening extends GetView<ListeningController> {
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                AppVideoPlayer(AppVideoPlayerArg(controller.mediaPath.value,
-                    onUpdate: onVideoUpdate)),
+                AppVideoPlayer(controller.playCtl, onVideoUpdate),
                 ListeningText()
               ],
             );

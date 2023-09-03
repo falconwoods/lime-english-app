@@ -19,35 +19,25 @@ class Subtitle {
 
     for (int i = 0; i < _entries.length; i++) {
       if (duration >= _entries[i].start && duration <= _entries[i].end) {
-        // If the duration is within the current subtitle's time range, return it.
         matchingEntry = _entries[i];
         break;
       } else if (duration < _entries[i].start) {
-        // If the duration is before the start of the current subtitle,
-        // return the previous subtitle as long as it's not the first one.
-        if (i > 0) {
-          matchingEntry = _entries[i - 1];
-        }
+        matchingEntry = i > 0 ? _entries[i - 1] : _entries[0];
         break;
       }
     }
 
-    // If no matching subtitle was found, you can return an empty or default subtitle entry.
-    return matchingEntry ?? SubtitleEntry(0, Duration.zero, Duration.zero, '');
-  }
-
-  SubtitleEntry getLine(int index) {
-    return _entries[index];
+    return matchingEntry ?? SubtitleEntry(1, Duration.zero, Duration.zero, '');
   }
 
   SubtitleEntry getPreLine(Duration duration) {
     SubtitleEntry se = getSubtitle(duration);
-    return getSubtitleByLine(se.index - 1);
+    return getLine(se.sequence - 1);
   }
 
   SubtitleEntry getNextLine(Duration duration) {
     SubtitleEntry se = getSubtitle(duration);
-    return getSubtitleByLine(se.index + 1);
+    return getLine(se.sequence + 1);
   }
 
   // String getSubtitle(Duration duration) {
@@ -58,9 +48,10 @@ class Subtitle {
   //   return matchingEntry.text;
   // }
 
-  SubtitleEntry getSubtitleByLine(int lineIndex) {
-    lineIndex = lineIndex.clamp(0, _entries.length - 1);
-    return _entries[lineIndex];
+  SubtitleEntry getLine(int sequence) {
+    int index = sequence - 1;
+    index = index.clamp(0, _entries.length - 1);
+    return _entries[index];
   }
 
   // String getSubtitleByLine(int lineIndex) {
@@ -116,10 +107,11 @@ class Subtitle {
 }
 
 class SubtitleEntry {
-  final int index;
+  /// start from 1
+  final int sequence;
   final Duration start;
   final Duration end;
   final String text;
 
-  SubtitleEntry(this.index, this.start, this.end, this.text);
+  SubtitleEntry(this.sequence, this.start, this.end, this.text);
 }

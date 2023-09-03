@@ -1,22 +1,19 @@
 import 'dart:io';
 
+import 'package:lime_english/app/data/hive/episode_record.dart';
+import 'package:lime_english/app/modules/episode/widgets/listening/listening_arg.dart';
+import 'package:lime_english/app/services/file_service.dart';
 import 'package:lime_english/app/services/player/Subtitle.dart';
 import 'package:lime_english/core/values/consts.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:video_player/video_player.dart';
 
-class PlayerArg {
-  late final String src;
-  late final ResourceType srcType;
-  late final String subtitle;
-  late final ResourceType subtitleType;
+class LoadResult {
+  late final Subtitle primarySub;
+  late final Subtitle secondarySub;
 
-  PlayerArg(
-      {required this.src,
-      required this.srcType,
-      required this.subtitle,
-      required this.subtitleType});
+  LoadResult(this.primarySub, this.secondarySub);
 }
 
 enum ResourceType { network, asset, file }
@@ -33,7 +30,10 @@ class PlayerService extends GetxService {
   var subtitleText = ''.obs;
   var subtitleIndex = 0.obs;
 
-  VideoPlayerController? _videoPlayerController;
+  // player status
+  final Rx<bool> isPlaying = false.obs;
+
+  VideoPlayerController? videoCtl;
 
   Future<PlayerService> init() async {
     box = GetStorage();
@@ -51,7 +51,7 @@ class PlayerService extends GetxService {
 
   @override
   void onClose() {
-    _videoPlayerController?.dispose();
+    videoCtl?.dispose();
     _saveStorage();
     super.onClose();
   }
@@ -61,56 +61,75 @@ class PlayerService extends GetxService {
     await box.write(CUR_PLAYING_EPISODE, _curPlayingEpisodeId);
   }
 
+  Future<LoadResult> loadEpisode(EpisodeRecord episode) async {
+    // download
+    FileService fs = Get.find<FileService>();
+    String mediaPath = await fs.download(episode.mediaSrc);
+    Subtitle priSub = await Subtitle()
+        .loadFromFile(await fs.download(episode.subtitles['en']!));
+    Subtitle secSub = await Subtitle()
+        .loadFromFile(await fs.download(episode.subtitles['cn']!));
+
+    // init video player
+    videoCtl?.dispose();
+    videoCtl = VideoPlayerController.file(File(mediaPath));
+    await videoCtl!.initialize();
+    videoCtl!.addListener(_onPlayerUpdate);
+
+    subtitle = priSub;
+
+    LoadResult ret = LoadResult(priSub, secSub);
+    return ret;
+  }
+
+  Future<void> initPlay() async {}
+
   void next() {
     // get next episode from play list
 
     // play next episode
   }
 
-  void playNext(PlayerArg arg) async {
+  void playNext(int programId, EpisodeRecord episode) async {
     // init video player
-    _videoPlayerController?.dispose();
+    videoCtl?.dispose();
 
-    if (arg.srcType == ResourceType.network) {
-      _videoPlayerController =
-          VideoPlayerController.networkUrl(Uri.parse(arg.src));
-    } else if (arg.srcType == ResourceType.asset) {
-      _videoPlayerController = VideoPlayerController.asset(arg.src);
+    if (episode.mediaSrc.startsWith('http')) {
+      videoCtl = VideoPlayerController.networkUrl(Uri.parse(episode.mediaSrc));
+    } else if (episode.mediaSrc.startsWith('assets/')) {
+      videoCtl = VideoPlayerController.asset(episode.mediaSrc);
     } else {
-      _videoPlayerController = VideoPlayerController.file(File(arg.src));
+      videoCtl = VideoPlayerController.file(File(episode.mediaSrc));
     }
 
-    _videoPlayerController?.addListener(_onPlayerUpdate);
+    videoCtl!.addListener(_onPlayerUpdate);
 
     // init subtitle
-
-    subtitle.loadFromFile(arg.subtitle);
+    subtitle.loadFromFile(episode.subtitles['en']!);
   }
 
   void play() {
-    _videoPlayerController?.play();
+    videoCtl?.play();
   }
 
   void pause() {
-    _videoPlayerController?.pause();
+    videoCtl?.pause();
   }
 
   void nextSentence() {
-    if (subtitle.isEmpty() || _videoPlayerController == null) {
+    if (subtitle.isEmpty() || videoCtl == null) {
       return;
     }
 
     // calc seconds of next sentence from subtitles
-    SubtitleEntry se =
-        subtitle.getNextLine(_videoPlayerController!.value.position);
-    _videoPlayerController?.seekTo(se.start);
+    SubtitleEntry se = subtitle.getNextLine(videoCtl!.value.position);
+    videoCtl?.seekTo(se.start);
   }
 
   void preSentence() {
     // calc seconds of next sentence from subtitles
-    SubtitleEntry se =
-        subtitle.getPreLine(_videoPlayerController!.value.position);
-    _videoPlayerController?.seekTo(se.start);
+    SubtitleEntry se = subtitle.getPreLine(videoCtl!.value.position);
+    videoCtl?.seekTo(se.start);
   }
 
   set playSpeed(double speed) {}
@@ -120,9 +139,10 @@ class PlayerService extends GetxService {
   }
 
   void _onPlayerUpdate() {
-    var videoDuration = _videoPlayerController!.value.duration;
+    var videoDuration = videoCtl!.value.duration;
     SubtitleEntry se = subtitle.getSubtitle(videoDuration);
     subtitleText.value = se.text;
-    subtitleIndex.value = se.index;
+    subtitleIndex.value = se.sequence;
+    isPlaying.value = videoCtl!.value.isPlaying;
   }
 }
