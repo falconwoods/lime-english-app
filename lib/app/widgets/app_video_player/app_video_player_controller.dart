@@ -29,7 +29,7 @@ class AppVideoPlayerController extends GetxController {
       //   arg.onUpdate!(videoCtl.value);
       // });
 
-      _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) async {
+      _timer = Timer.periodic(const Duration(milliseconds: 500), (timer) async {
         if (isClosed == false) {
           Duration? pos = await videoCtl.position;
           pos = pos ?? Duration.zero;
