@@ -39,15 +39,13 @@ class Listening extends GetView<ListeningController> {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  AppVideoPlayer(AppVideoPlayerArg(controller.mediaPath.value,
-                      onUpdate: onVideoUpdate)),
-                  ListeningText()
-                ],
-              ),
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                AppVideoPlayer(AppVideoPlayerArg(controller.mediaPath.value,
+                    onUpdate: onVideoUpdate)),
+                ListeningText()
+              ],
             );
           }
         });

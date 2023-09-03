@@ -22,6 +22,7 @@ class ListeningText extends GetView<ListeningTextController> {
           lc.subtitleOption,
           lc.curSubtitleIndex));
     }
-    return Column(children: blocks);
+    return Expanded(
+        child: SingleChildScrollView(child: Column(children: blocks)));
   }
 }
