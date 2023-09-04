@@ -27,11 +27,26 @@ class ListeningController extends GetxController {
     initFuture = _init();
   }
 
+  @override
+  void onClose() {
+    super.onClose();
+    playCtl.removeListener(onPlayerUpdate);
+  }
+
   Future<void> _init() async {
     PlayerService ps = Get.find<PlayerService>();
     LoadResult ret = await ps.loadEpisode(arg.episode);
     primarySubtitle = ret.primarySub;
     secondarySubtitle = ret.secondarySub;
     playCtl = ps.videoCtl!;
+    playCtl.addListener(onPlayerUpdate);
+    playCtl.play();
+  }
+
+  void onPlayerUpdate() {
+    Duration position = playCtl.value.position;
+    var se = primarySubtitle.getSubtitle(position);
+    curSubSequence.value = se.sequence;
+    // Get.log('onPlayerUpdate $position ${controller.curSubtitleIndex} ${se.text}');
   }
 }

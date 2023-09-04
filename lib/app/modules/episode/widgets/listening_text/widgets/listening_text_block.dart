@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lime_english/app/data/enum/subtitle_option.dart';
-import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/collect_switch.dart';
+import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/fav_switch.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/listening_text_block_controller.dart';
 
 class ListeningTextBlock extends GetView<ListeningTextBlockController> {
@@ -44,8 +44,8 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 8, 10, 0),
-              child: CollectSwitch(
-                isCollected: false,
+              child: FavSwitch(
+                false,
                 onChanged: (val) {
                   Get.log('collect $val');
                 },

@@ -7,7 +7,7 @@ class AppVideoPlayer extends GetView<AppVideoPlayerController> {
   final VideoPlayerController playerCtl;
   final ValueChanged<Duration>? onUpdate;
 
-  const AppVideoPlayer(this.playerCtl, this.onUpdate, {Key? key})
+  const AppVideoPlayer(this.playerCtl, {Key? key, this.onUpdate})
       : super(key: key);
 
   @override

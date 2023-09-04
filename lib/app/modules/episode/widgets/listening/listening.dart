@@ -9,12 +9,6 @@ class Listening extends GetView<ListeningController> {
   final ListeningArg arg;
   const Listening(this.arg, {Key? key}) : super(key: key);
 
-  void onVideoUpdate(Duration position) {
-    var se = controller.primarySubtitle.getSubtitle(position);
-    controller.curSubSequence.value = se.sequence;
-    // Get.log('videoUpdate $position ${controller.curSubtitleIndex} ${se.text}');
-  }
-
   @override
   Widget build(BuildContext context) {
     Get.put(ListeningController(arg));
@@ -31,10 +25,7 @@ class Listening extends GetView<ListeningController> {
           } else {
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                AppVideoPlayer(controller.playCtl, onVideoUpdate),
-                ListeningText()
-              ],
+              children: [AppVideoPlayer(controller.playCtl), ListeningText()],
             );
           }
         });

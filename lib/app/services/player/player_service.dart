@@ -51,9 +51,10 @@ class PlayerService extends GetxService {
 
   @override
   void onClose() {
+    super.onClose();
     videoCtl?.dispose();
     _saveStorage();
-    super.onClose();
+    videoCtl!.removeListener(_onPlayerUpdate);
   }
 
   _saveStorage() async {
