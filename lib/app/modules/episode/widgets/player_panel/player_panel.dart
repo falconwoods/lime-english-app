@@ -1,7 +1,11 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:lime_english/app/modules/episode/widgets/listening/listening_controller.dart';
 import 'package:lime_english/app/modules/episode/widgets/player_panel/palyer_panel_controller.dart';
+import 'package:lime_english/app/widgets/switch_button.dart';
 
 class PlayerPanel extends GetView<PlayerPanelController> {
   const PlayerPanel({super.key});
@@ -26,6 +30,11 @@ class PlayerPanel extends GetView<PlayerPanelController> {
 
   void onSpeed() {}
 
+  void onSwitchVideo(int index, dynamic value) {
+    ListeningController lc = Get.find<ListeningController>();
+    lc.showVideo(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     Get.put(PlayerPanelController());
@@ -33,10 +42,30 @@ class PlayerPanel extends GetView<PlayerPanelController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        IconButton(
-            icon: const Icon(FontAwesomeIcons.earListen),
-            iconSize: 20,
-            onPressed: onListeningMode),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            IconButton(
+                icon: const Icon(FontAwesomeIcons.earListen),
+                iconSize: 20,
+                onPressed: onListeningMode),
+            SwitchButton(
+              values: const [true, false],
+              widgets: const [
+                Icon(
+                  FontAwesomeIcons.eye,
+                  size: 20,
+                ),
+                Icon(
+                  FontAwesomeIcons.eyeSlash,
+                  size: 20,
+                )
+              ],
+              defaultIndex: 0,
+              onSwitch: onSwitchVideo,
+            )
+          ],
+        ),
         Row(
           children: [
             IconButton(

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:get/get.dart';
@@ -11,13 +12,15 @@ import 'package:video_player/video_player.dart';
 class ListeningController extends GetxController {
   late final ListeningArg arg;
   late final Future<void> initFuture;
+  final Rx<bool> showVideo = true.obs;
   final isDownloading = false.obs;
   final Rx<SubtitleOption> subtitleOption = SubtitleOption.all.obs;
   final Rx<int> curSubSequence = 1.obs;
-  // final Rx<Map<String, Subtitle>> _subtitles = Rx<Map<String, Subtitle>>({});
   late final Subtitle primarySubtitle;
   late final Subtitle secondarySubtitle;
-  late final VideoPlayerController playCtl;
+  late final VideoPlayerController playerCtl;
+
+  late final Timer? _timer;
 
   ListeningController(this.arg);
 
@@ -30,7 +33,8 @@ class ListeningController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    playCtl.removeListener(onPlayerUpdate);
+    _timer?.cancel();
+    // playerCtl.removeListener(onPlayerUpdate);
   }
 
   Future<void> _init() async {
@@ -38,15 +42,27 @@ class ListeningController extends GetxController {
     LoadResult ret = await ps.loadEpisode(arg.episode);
     primarySubtitle = ret.primarySub;
     secondarySubtitle = ret.secondarySub;
-    playCtl = ps.videoCtl!;
-    playCtl.addListener(onPlayerUpdate);
-    playCtl.play();
+    playerCtl = ps.videoCtl!;
+    // playerCtl.addListener(onPlayerUpdate);
+    // playerCtl.play();
+
+    _timer = Timer.periodic(const Duration(milliseconds: 200), (timer) async {
+      if (isClosed == false) {
+        Duration? pos = await playerCtl.position;
+        pos = pos ?? Duration.zero;
+        onPlayerUpdate(pos);
+      }
+    });
   }
 
-  void onPlayerUpdate() {
-    Duration position = playCtl.value.position;
+  void onPlayerUpdate(Duration position) {
+    // Duration position = playCtl.value.position;
     var se = primarySubtitle.getSubtitle(position);
     curSubSequence.value = se.sequence;
     // Get.log('onPlayerUpdate $position ${controller.curSubtitleIndex} ${se.text}');
+  }
+
+  void onShowVideo(bool val) {
+    showVideo.value = val;
   }
 }

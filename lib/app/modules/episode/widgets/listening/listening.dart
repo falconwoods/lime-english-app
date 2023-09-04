@@ -25,7 +25,14 @@ class Listening extends GetView<ListeningController> {
           } else {
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [AppVideoPlayer(controller.playCtl), ListeningText()],
+              children: [
+                Obx(() {
+                  return controller.showVideo.value
+                      ? AppVideoPlayer(controller.playerCtl)
+                      : Container();
+                }),
+                ListeningText()
+              ],
             );
           }
         });
