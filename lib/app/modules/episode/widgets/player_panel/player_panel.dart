@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening/listening_controller.dart';
 import 'package:lime_english/app/modules/episode/widgets/player_panel/palyer_panel_controller.dart';
 import 'package:lime_english/app/widgets/switch_button.dart';
+import 'package:lime_english/core/utils/extensions/string_extensions.dart';
 
 class PlayerPanel extends GetView<PlayerPanelController> {
   const PlayerPanel({super.key});
@@ -29,6 +30,8 @@ class PlayerPanel extends GetView<PlayerPanelController> {
   }
 
   void onSpeed() {}
+
+  ///extract word, blank and punctuation into an string array from a string
 
   void onSwitchVideo(int index, dynamic value) {
     ListeningController lc = Get.find<ListeningController>();
