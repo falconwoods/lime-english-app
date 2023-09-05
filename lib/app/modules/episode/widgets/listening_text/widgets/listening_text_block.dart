@@ -8,21 +8,22 @@ import 'package:lime_english/app/services/player/player_service.dart';
 import 'package:lime_english/core/utils/extensions/string_extensions.dart';
 
 class ListeningTextBlock extends GetView<ListeningTextBlockController> {
-  final int index;
+  /// starts from 1
+  final int sequence;
   final String primaryText;
   final String secondaryText;
   final Rx<SubtitleOption> subtitleOption;
-  final Rx<int> playingLine;
+  final Rx<int> playingSequence;
   final Rx<int> selectedWordIndex = (-1).obs;
 
-  ListeningTextBlock(this.index, this.primaryText, this.secondaryText,
-      this.subtitleOption, this.playingLine,
+  ListeningTextBlock(this.sequence, this.primaryText, this.secondaryText,
+      this.subtitleOption, this.playingSequence,
       {Key? key})
       : super(key: key);
 
   void onTapWord(int index) {
     selectedWordIndex.value = index;
-    PlayerService ps = Get.find<PlayerService>();
+    PlayerService ps = controller.ps;
     bool isPlaying = ps.isPlaying.value;
     if (isPlaying) {
       ps.pause();
@@ -73,10 +74,10 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
 
       List<TextSpan> arr = [];
       for (int i = 0; i < words.length; i++) {
-        TapGestureRecognizer? tapGes;
+        LongPressGestureRecognizer? tapGes;
         if (words[i].isWord()) {
-          tapGes = TapGestureRecognizer()
-            ..onTap = () {
+          tapGes = LongPressGestureRecognizer()
+            ..onLongPress = () {
               onTapWord(i);
             };
         }
@@ -91,42 +92,16 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
             style: TextStyle(
                 fontSize: 16,
                 backgroundColor: bgColor,
-                color: playingLine.value == index
+                color: playingSequence.value == sequence
                     ? Colors.green.shade400
                     : Colors.black,
                 fontWeight: FontWeight.w400),
             recognizer: tapGes));
       }
-      // final arr = words.map(
-      //   (e) {
-      //     TapGestureRecognizer? tapGes;
-      //     if (e.isWord()) {
-      //       tapGes = TapGestureRecognizer()..onTap = onTapWord;
-      //     }
-
-      //     return TextSpan(
-      //         text: e,
-      //         style: TextStyle(
-      //             fontSize: 16,
-      //             color: playingLine.value == index
-      //                 ? Colors.green.shade400
-      //                 : Colors.black,
-      //             fontWeight: FontWeight.w400),
-      //         recognizer: tapGes);
-      //   },
-      // ).toList();
 
       return RichText(
         text: TextSpan(children: arr),
       );
-
-      // return Text(primaryText,
-      //     style: TextStyle(
-      //         fontSize: 16,
-      //         color: playingLine.value == index
-      //             ? Colors.green.shade400
-      //             : Colors.black,
-      //         fontWeight: FontWeight.w400));
     });
   }
 
@@ -135,8 +110,15 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
         style: const TextStyle(fontSize: 14, color: Colors.black54));
   }
 
+  void onTapBlock() {
+    PlayerService ps = controller.ps;
+    ps.jumpToSentence(sequence);
+  }
+
   @override
   Widget build(BuildContext context) {
+    Get.put(ListeningTextBlockController());
+
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: Row(
@@ -153,9 +135,12 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
               ),
             ),
             Expanded(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [getPrimaryText(), getSecondaryText()],
+                child: GestureDetector(
+              onTap: onTapBlock,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [getPrimaryText(), getSecondaryText()],
+              ),
             ))
           ],
         ));

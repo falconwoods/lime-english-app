@@ -133,6 +133,11 @@ class PlayerService extends GetxService {
     videoCtl?.seekTo(se.start);
   }
 
+  void jumpToSentence(int sequence) {
+    SubtitleEntry se = subtitle.getLine(sequence);
+    videoCtl?.seekTo(se.start);
+  }
+
   set playSpeed(double speed) {}
 
   double get playSpeed {

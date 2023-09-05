@@ -1,6 +1,6 @@
 extension StringExtensions on String {
   List<String> splitWords() {
-    RegExp pattern = RegExp(r"[\w']+|[.,!?;]|\s+");
+    RegExp pattern = RegExp(r"[\w']+|[.,!?';]|\s+");
 
     Iterable<Match> matches = pattern.allMatches(this);
 
