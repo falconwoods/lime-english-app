@@ -16,4 +16,21 @@ extension StringExtensions on String {
     RegExp pattern = RegExp(r'^[a-zA-Z\-]+$');
     return pattern.hasMatch(this);
   }
+
+  Map<String, String> splitMeaning() {
+    final input = this;
+    final regex = RegExp(r"(\w+\.)");
+
+    final matches = regex.allMatches(input);
+    final meanings = input.split(regex).where((s) => s.isNotEmpty).toList();
+
+    final resultMap = <String, String>{};
+
+    for (int i = 0; i < matches.length; i++) {
+      final key = matches.elementAt(i).group(0);
+      final value = meanings[i];
+      resultMap[key!] = value;
+    }
+    return resultMap;
+  }
 }

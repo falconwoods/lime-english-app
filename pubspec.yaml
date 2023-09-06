@@ -22,8 +22,10 @@ dependencies:
   hive: ^2.2.3
   json_annotation: ^4.8.1
   logger: ^2.0.1
+  path: ^1.8.3
   path_provider: ^2.1.0
   photo_view: null
+  sqflite: ^2.3.0
   video_player: ^2.7.1
 
 dev_dependencies:
@@ -39,6 +41,7 @@ flutter:
   assets:
     - .env
     - assets/translations/zh_CN.json
+    - assets/db/dic.db
     - assets/images/1.jpg
     - assets/video/ted1.mp4
     - assets/video/ted1-en.srt

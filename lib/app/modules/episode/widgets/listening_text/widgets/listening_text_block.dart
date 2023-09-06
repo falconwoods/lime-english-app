@@ -5,6 +5,7 @@ import 'package:lime_english/app/data/enum/subtitle_option.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/fav_switch.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/listening_text_block_controller.dart';
 import 'package:lime_english/app/services/player/player_service.dart';
+import 'package:lime_english/app/widgets/vocab_explain/vocab_explain.dart';
 import 'package:lime_english/core/utils/extensions/string_extensions.dart';
 
 class ListeningTextBlock extends GetView<ListeningTextBlockController> {
@@ -15,13 +16,16 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
   final Rx<SubtitleOption> subtitleOption;
   final Rx<int> playingSequence;
   final Rx<int> selectedWordIndex = (-1).obs;
+  late final List<String> words;
 
   ListeningTextBlock(this.sequence, this.primaryText, this.secondaryText,
       this.subtitleOption, this.playingSequence,
       {Key? key})
-      : super(key: key);
+      : super(key: key) {
+    words = primaryText.splitWords();
+  }
 
-  void onTapWord(int index) {
+  void onTapWord(int index) async {
     selectedWordIndex.value = index;
     PlayerService ps = controller.ps;
     bool isPlaying = ps.isPlaying.value;
@@ -30,35 +34,8 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
     }
 
     Get.bottomSheet(
-      Container(
-        decoration: const BoxDecoration(
-          color: Colors.white, // Customize the color of the sheet
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(20), // Add rounded corners if desired
-          ),
-        ),
-        child: Wrap(
-          children: <Widget>[
-            ListTile(
-              leading: Icon(Icons.photo),
-              title: Text('Gallery'),
-              onTap: () {
-                // Handle gallery option
-                Get.back(); // Close the bottom sheet
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.camera),
-              title: Text('Camera'),
-              onTap: () {
-                // Handle camera option
-                Get.back(); // Close the bottom sheet
-              },
-            ),
-            // Add more options as needed
-          ],
-        ),
-      ),
+      VocabExplain(words[index]),
+      isScrollControlled: true,
       barrierColor: Colors.transparent, // Set background color to transparent
     ).whenComplete(() {
       selectedWordIndex.value = -1;
@@ -70,8 +47,6 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
 
   getPrimaryText() {
     return Obx(() {
-      final words = primaryText.splitWords();
-
       List<TextSpan> arr = [];
       for (int i = 0; i < words.length; i++) {
         LongPressGestureRecognizer? tapGes;
