@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:lime_english/app/data/hive/hive_id.dart';
 
 @HiveType(typeId: HiveId.episode)

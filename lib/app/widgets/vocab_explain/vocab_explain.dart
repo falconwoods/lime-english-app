@@ -23,7 +23,7 @@ class VocabExplain extends GetView<VocabExplainController> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 3, 5, 0),
               child: FavSwitch(false, onChanged: (val) {
-                controller.favPartOfSpeech(key);
+                controller.favVocabType(key, val);
               }),
             ),
             Expanded(

@@ -20,7 +20,7 @@ dependencies:
   freezed_annotation: ^2.4.1
   get: ^4.6.5
   get_storage: null
-  hive: ^2.2.3
+  hive_flutter: ^1.1.0
   json_annotation: ^4.8.1
   logger: ^2.0.1
   path: ^1.8.3

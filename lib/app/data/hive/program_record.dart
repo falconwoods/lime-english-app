@@ -1,7 +1,8 @@
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:lime_english/app/data/hive/episode_record.dart';
+import 'package:lime_english/app/data/hive/hive_id.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: HiveId.program)
 class ProgramRecord extends HiveObject {
   @HiveField(0)
   int programId;
