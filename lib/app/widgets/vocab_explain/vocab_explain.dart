@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/fav_switch.dart';
 import 'package:lime_english/app/widgets/vocab_explain/vocab_explain_controller.dart';
 
 class VocabExplain extends GetView<VocabExplainController> {
@@ -15,23 +16,51 @@ class VocabExplain extends GetView<VocabExplainController> {
       var meanings = controller.meanings.value;
       List<Widget> meaningWidgets = [];
       meanings.forEach((key, value) {
-        meaningWidgets.add(Text('$key$value'));
+        meaningWidgets.add(Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 3, 5, 0),
+              child: FavSwitch(false, onChanged: (val) {
+                controller.favPartOfSpeech(key);
+              }),
+            ),
+            Expanded(
+                child: Text(
+              '$key$value',
+              // softWrap: true,
+              overflow: TextOverflow.ellipsis,
+            ))
+          ],
+        ));
       });
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            vi.word,
-            style: TextStyle(fontSize: 18, color: Colors.green.shade400),
-          ),
-          Text(
-            '/${vi.pronunciation}/',
-            style: const TextStyle(
-                fontStyle: FontStyle.italic, color: Colors.black38),
-          ),
-          ...meaningWidgets
-        ],
+      return GestureDetector(
+        onTap: () => controller.pronounceWord(vocab),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  vi.word,
+                  style: TextStyle(fontSize: 18, color: Colors.green.shade400),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Text(
+                    '/${vi.pronunciation}/',
+                    style: const TextStyle(
+                        fontStyle: FontStyle.italic, color: Colors.black38),
+                  ),
+                )
+              ],
+            ),
+            ...meaningWidgets
+          ],
+        ),
       );
     });
 
