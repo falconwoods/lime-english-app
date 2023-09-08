@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:hive_flutter/adapters.dart';
+import 'package:lime_english/app/data/hive/example_entity.dart';
 import 'package:lime_english/app/data/hive/hive_id.dart';
 
 part 'fav_vocab_record.g.dart';
@@ -21,29 +22,26 @@ class FavVocabRecord extends HiveObject {
   int updateTimeStamp;
 
   @HiveField(4)
-  Map<int, String> examples;
+  Map<int, ExampleEntity> examples;
 
-  @HiveField(5)
-  Map<int, int> examplesRef;
-
-  FavVocabRecord(this.text, this.types, this.deleted, this.updateTimeStamp,
-      this.examples, this.examplesRef);
+  FavVocabRecord(
+      this.text, this.types, this.deleted, this.updateTimeStamp, this.examples);
 
   factory FavVocabRecord.empty(String vocab) {
-    return FavVocabRecord(vocab, 0, false, 0, {}, {});
+    return FavVocabRecord(vocab, 0, false, 0, {});
   }
 
-  FavVocabRecord addWordType(String type, String example, int exampleRef) {
+  FavVocabRecord addWordType(
+      String type, String example, int episodeId, int sequence) {
     types = types = VocabTypes.addWordType(types, type);
-    examples[VocabTypes.getIntType(type)] = example;
-    examplesRef[VocabTypes.getIntType(type)] = exampleRef;
+    examples[VocabTypes.getIntType(type)] =
+        ExampleEntity(example, episodeId, sequence);
     return this;
   }
 
   FavVocabRecord rmWordType(String type) {
     types = VocabTypes.rmWordType(types, type);
     examples.remove(VocabTypes.getIntType(type));
-    examplesRef.remove(VocabTypes.getIntType(type));
     return this;
   }
 

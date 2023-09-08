@@ -1,1 +1,1 @@
-enum SubtitleOption { all, primary, secondary }
+enum CaptionOption { all, primary, secondary }

@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lime_english/app/data/hive/example_entity.dart';
 import 'package:lime_english/app/data/hive/fav_vocab_record.dart';
 import 'package:lime_english/app/data/hive/episode_record.dart';
 import 'package:lime_english/app/data/hive/program_record.dart';
@@ -18,6 +19,7 @@ class DBService extends GetxService {
     // await Hive.deleteFromDisk();
 
     Hive.registerAdapter<FavVocabRecord>(FavVocabRecordAdapter());
+    Hive.registerAdapter<ExampleEntity>(ExampleEntityAdapter());
     Hive.registerAdapter<ProgramRecord>(ProgramRecordAdapter());
     Hive.registerAdapter<EpisodeRecord>(EpisodeRecordAdapter());
 

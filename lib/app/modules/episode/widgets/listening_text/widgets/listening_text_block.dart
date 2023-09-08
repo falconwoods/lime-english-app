@@ -15,7 +15,7 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
   final int sequence;
   final String primaryText;
   final String secondaryText;
-  final Rx<SubtitleOption> subtitleOption;
+  final Rx<CaptionOption> subtitleOption;
   final Rx<int> playingSequence;
   final Rx<int> selectedWordIndex = (-1).obs;
   late final List<String> words;
@@ -35,11 +35,9 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
       ps.pause();
     }
 
-    int exampleRef = AppUtil.encodeExampleRef(
-        controller.listenCtrl.arg.episode.episodeId, sequence);
-
     Get.bottomSheet(
-      VocabExplain(words[index], primaryText, 1, exampleRef),
+      VocabExplain(words[index], primaryText, 1,
+          controller.listenCtrl.arg.episode.episodeId, sequence),
       isScrollControlled: true,
       barrierColor: Colors.transparent, // Set background color to transparent
     ).whenComplete(() {

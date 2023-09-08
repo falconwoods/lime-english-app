@@ -11,13 +11,15 @@ class VocabExplainController extends GetxController {
   late final DBService db;
   final String vocab;
   final String sentence;
-  final int exampleRef;
+  final int episodeId;
+  final int captionSequence;
   late final Rx<DicWord> vocabInfo;
   late final Rx<Map<String, String>> meanings = Rx<Map<String, String>>({});
   late final PronounceService pronService;
   late final FavVocabRecord fvr;
 
-  VocabExplainController(this.vocab, this.sentence, this.exampleRef) {
+  VocabExplainController(
+      this.vocab, this.sentence, this.episodeId, this.captionSequence) {
     vocabInfo = Rx<DicWord>(DicWord.empty(vocab));
   }
 
@@ -42,7 +44,7 @@ class VocabExplainController extends GetxController {
   void favVocabType(String type, bool fav) {
     FavVocabRecord fv = db.getFavVocab(vocab);
     if (fav) {
-      fv.addWordType(type, sentence, exampleRef);
+      fv.addWordType(type, sentence, episodeId, captionSequence);
     } else {
       fv.rmWordType(type);
     }

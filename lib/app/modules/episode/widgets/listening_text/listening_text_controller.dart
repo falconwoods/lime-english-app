@@ -15,14 +15,10 @@ class ListeningTextController extends GetxController {
 
     ListeningController lc = Get.find<ListeningController>();
 
-    for (var i = 0; i < lc.primarySubtitle.length; i++) {
+    for (var i = 0; i < lc.primaryCap.length; i++) {
       GlobalKey k = GlobalKey();
-      blocks.add(ListeningTextBlock(
-          i + 1,
-          lc.primarySubtitle.getLine(i + 1).text,
-          lc.secondarySubtitle.getLine(i + 1).text,
-          lc.subtitleOption,
-          lc.curSubSequence,
+      blocks.add(ListeningTextBlock(i + 1, lc.primaryCap.getLine(i + 1).text,
+          lc.secondaryCap.getLine(i + 1).text, lc.capOption, lc.curSubSequence,
           key: k));
     }
 

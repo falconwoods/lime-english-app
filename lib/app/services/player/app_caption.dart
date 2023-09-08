@@ -4,18 +4,18 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 
-class Subtitle {
-  late List<SubtitleEntry> _entries;
+class AppCaption {
+  late List<AppCaptionEntry> _entries;
 
-  Future<Subtitle> loadFromFile(String filePath) async {
+  Future<AppCaption> loadFromFile(String filePath) async {
     final file = File(filePath);
     final lines = await file.readAsLines();
     _entries = parseEntries(lines);
     return this;
   }
 
-  SubtitleEntry getSubtitle(Duration duration) {
-    SubtitleEntry? matchingEntry;
+  AppCaptionEntry getSubtitle(Duration duration) {
+    AppCaptionEntry? matchingEntry;
 
     for (int i = 0; i < _entries.length; i++) {
       if (duration >= _entries[i].start && duration <= _entries[i].end) {
@@ -27,16 +27,17 @@ class Subtitle {
       }
     }
 
-    return matchingEntry ?? SubtitleEntry(1, Duration.zero, Duration.zero, '');
+    return matchingEntry ??
+        AppCaptionEntry(1, Duration.zero, Duration.zero, '');
   }
 
-  SubtitleEntry getPreLine(Duration duration) {
-    SubtitleEntry se = getSubtitle(duration);
+  AppCaptionEntry getPreLine(Duration duration) {
+    AppCaptionEntry se = getSubtitle(duration);
     return getLine(se.sequence - 1);
   }
 
-  SubtitleEntry getNextLine(Duration duration) {
-    SubtitleEntry se = getSubtitle(duration);
+  AppCaptionEntry getNextLine(Duration duration) {
+    AppCaptionEntry se = getSubtitle(duration);
     return getLine(se.sequence + 1);
   }
 
@@ -48,7 +49,7 @@ class Subtitle {
   //   return matchingEntry.text;
   // }
 
-  SubtitleEntry getLine(int sequence) {
+  AppCaptionEntry getLine(int sequence) {
     int index = sequence - 1;
     index = index.clamp(0, _entries.length - 1);
     return _entries[index];
@@ -61,8 +62,8 @@ class Subtitle {
   //   return _entries[lineIndex].text;
   // }
 
-  List<SubtitleEntry> parseEntries(List<String> lines) {
-    final List<SubtitleEntry> entries = [];
+  List<AppCaptionEntry> parseEntries(List<String> lines) {
+    final List<AppCaptionEntry> entries = [];
     for (int i = 0; i < lines.length; i++) {
       if (lines[i].isEmpty) continue;
 
@@ -77,7 +78,7 @@ class Subtitle {
       final text = lines[i];
       i++;
 
-      entries.add(SubtitleEntry(index, start, end, text));
+      entries.add(AppCaptionEntry(index, start, end, text));
     }
     return entries;
   }
@@ -106,12 +107,12 @@ class Subtitle {
   }
 }
 
-class SubtitleEntry {
+class AppCaptionEntry {
   /// start from 1
   final int sequence;
   final Duration start;
   final Duration end;
   final String text;
 
-  SubtitleEntry(this.sequence, this.start, this.end, this.text);
+  AppCaptionEntry(this.sequence, this.start, this.end, this.text);
 }

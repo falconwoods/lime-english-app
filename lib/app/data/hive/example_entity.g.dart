@@ -1,41 +1,38 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'episode_record.dart';
+part of 'example_entity.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class EpisodeRecordAdapter extends TypeAdapter<EpisodeRecord> {
+class ExampleEntityAdapter extends TypeAdapter<ExampleEntity> {
   @override
-  final int typeId = 2;
+  final int typeId = 4;
 
   @override
-  EpisodeRecord read(BinaryReader reader) {
+  ExampleEntity read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return EpisodeRecord(
-      fields[0] as int,
-      fields[1] as String,
-      fields[2] as String,
-      (fields[3] as Map).cast<String, String>(),
+    return ExampleEntity(
+      fields[0] as String,
+      fields[1] as int,
+      fields[2] as int,
     );
   }
 
   @override
-  void write(BinaryWriter writer, EpisodeRecord obj) {
+  void write(BinaryWriter writer, ExampleEntity obj) {
     writer
-      ..writeByte(4)
-      ..writeByte(0)
-      ..write(obj.episodeId)
-      ..writeByte(1)
-      ..write(obj.episodeTitle)
-      ..writeByte(2)
-      ..write(obj.mediaSrc)
       ..writeByte(3)
-      ..write(obj.captions);
+      ..writeByte(0)
+      ..write(obj.example)
+      ..writeByte(1)
+      ..write(obj.episodeId)
+      ..writeByte(2)
+      ..write(obj.sequence);
   }
 
   @override
@@ -44,7 +41,7 @@ class EpisodeRecordAdapter extends TypeAdapter<EpisodeRecord> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is EpisodeRecordAdapter &&
+      other is ExampleEntityAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

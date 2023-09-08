@@ -1,17 +1,16 @@
 import 'dart:io';
 
 import 'package:lime_english/app/data/hive/episode_record.dart';
-import 'package:lime_english/app/modules/episode/widgets/listening/listening_arg.dart';
 import 'package:lime_english/app/services/file_service.dart';
-import 'package:lime_english/app/services/player/Subtitle.dart';
+import 'package:lime_english/app/services/player/app_caption.dart';
 import 'package:lime_english/core/values/consts.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:video_player/video_player.dart';
 
 class LoadResult {
-  late final Subtitle primarySub;
-  late final Subtitle secondarySub;
+  late final AppCaption primarySub;
+  late final AppCaption secondarySub;
 
   LoadResult(this.primarySub, this.secondarySub);
 }
@@ -26,7 +25,7 @@ class PlayerService extends GetxService {
   int _curPlayingEpisodeId = -1;
 
   // subtitle
-  Subtitle subtitle = Subtitle();
+  AppCaption caption = AppCaption();
   var subtitleText = ''.obs;
   var subtitleIndex = 0.obs;
 
@@ -66,10 +65,10 @@ class PlayerService extends GetxService {
     // download
     FileService fs = Get.find<FileService>();
     String mediaPath = await fs.download(episode.mediaSrc);
-    Subtitle priSub = await Subtitle()
-        .loadFromFile(await fs.download(episode.subtitles['en']!));
-    Subtitle secSub = await Subtitle()
-        .loadFromFile(await fs.download(episode.subtitles['cn']!));
+    AppCaption priSub = await AppCaption()
+        .loadFromFile(await fs.download(episode.captions['en']!));
+    AppCaption secSub = await AppCaption()
+        .loadFromFile(await fs.download(episode.captions['cn']!));
 
     // init video player
     videoCtl?.dispose();
@@ -77,7 +76,7 @@ class PlayerService extends GetxService {
     await videoCtl!.initialize();
     videoCtl!.addListener(_onPlayerUpdate);
 
-    subtitle = priSub;
+    caption = priSub;
 
     LoadResult ret = LoadResult(priSub, secSub);
     return ret;
@@ -106,7 +105,7 @@ class PlayerService extends GetxService {
     videoCtl!.addListener(_onPlayerUpdate);
 
     // init subtitle
-    subtitle.loadFromFile(episode.subtitles['en']!);
+    caption.loadFromFile(episode.captions['en']!);
   }
 
   void play() {
@@ -118,23 +117,23 @@ class PlayerService extends GetxService {
   }
 
   void nextSentence() {
-    if (subtitle.isEmpty() || videoCtl == null) {
+    if (caption.isEmpty() || videoCtl == null) {
       return;
     }
 
     // calc seconds of next sentence from subtitles
-    SubtitleEntry se = subtitle.getNextLine(videoCtl!.value.position);
+    AppCaptionEntry se = caption.getNextLine(videoCtl!.value.position);
     videoCtl?.seekTo(se.start);
   }
 
   void preSentence() {
     // calc seconds of next sentence from subtitles
-    SubtitleEntry se = subtitle.getPreLine(videoCtl!.value.position);
+    AppCaptionEntry se = caption.getPreLine(videoCtl!.value.position);
     videoCtl?.seekTo(se.start);
   }
 
   void jumpToSentence(int sequence) {
-    SubtitleEntry se = subtitle.getLine(sequence);
+    AppCaptionEntry se = caption.getLine(sequence);
     videoCtl?.seekTo(se.start);
   }
 
@@ -146,7 +145,7 @@ class PlayerService extends GetxService {
 
   void _onPlayerUpdate() {
     var videoDuration = videoCtl!.value.duration;
-    SubtitleEntry se = subtitle.getSubtitle(videoDuration);
+    AppCaptionEntry se = caption.getSubtitle(videoDuration);
     subtitleText.value = se.text;
     subtitleIndex.value = se.sequence;
     isPlaying.value = videoCtl!.value.isPlaying;
