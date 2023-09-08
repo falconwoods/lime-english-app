@@ -12,20 +12,14 @@ class DBService extends GetxService {
 
   Future<DBService> init() async {
     // init hive
-    // final suppDir = await getApplicationSupportDirectory();
-    // Hive.init(suppDir.path);
-    await Hive.initFlutter();
-    await Hive.deleteFromDisk();
+    final suppDir = await getApplicationSupportDirectory();
+    Hive.init(suppDir.path);
+    // await Hive.initFlutter();
+    // await Hive.deleteFromDisk();
 
-    // register adapters
-    List<TypeAdapter> adapters = [
-      FavVocabRecordAdapter(),
-      ProgramRecordAdapter(),
-      EpisodeRecordAdapter()
-    ];
-    for (final adapter in adapters) {
-      Hive.registerAdapter(adapter);
-    }
+    Hive.registerAdapter<FavVocabRecord>(FavVocabRecordAdapter());
+    Hive.registerAdapter<ProgramRecord>(ProgramRecordAdapter());
+    Hive.registerAdapter<EpisodeRecord>(EpisodeRecordAdapter());
 
     // open box
     _favVocabBox = await Hive.openBox<FavVocabRecord>('favVocabBox');

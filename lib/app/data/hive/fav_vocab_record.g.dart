@@ -22,13 +22,14 @@ class FavVocabRecordAdapter extends TypeAdapter<FavVocabRecord> {
       fields[2] as bool,
       fields[3] as int,
       (fields[4] as Map).cast<int, String>(),
+      (fields[5] as Map).cast<int, int>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, FavVocabRecord obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.text)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class FavVocabRecordAdapter extends TypeAdapter<FavVocabRecord> {
       ..writeByte(3)
       ..write(obj.updateTimeStamp)
       ..writeByte(4)
-      ..write(obj.examples);
+      ..write(obj.examples)
+      ..writeByte(5)
+      ..write(obj.examplesRef);
   }
 
   @override

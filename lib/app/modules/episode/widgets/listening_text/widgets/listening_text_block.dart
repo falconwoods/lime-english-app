@@ -7,6 +7,7 @@ import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/
 import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/listening_text_block_controller.dart';
 import 'package:lime_english/app/services/player/player_service.dart';
 import 'package:lime_english/app/widgets/vocab_explain/vocab_explain.dart';
+import 'package:lime_english/core/utils/app_util.dart';
 import 'package:lime_english/core/utils/extensions/string_extensions.dart';
 
 class ListeningTextBlock extends GetView<ListeningTextBlockController> {
@@ -34,8 +35,11 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
       ps.pause();
     }
 
+    int exampleRef = AppUtil.encodeExampleRef(
+        controller.listenCtrl.arg.episode.episodeId, sequence);
+
     Get.bottomSheet(
-      VocabExplain(words[index], primaryText, 1),
+      VocabExplain(words[index], primaryText, 1, exampleRef),
       isScrollControlled: true,
       barrierColor: Colors.transparent, // Set background color to transparent
     ).whenComplete(() {

@@ -23,22 +23,27 @@ class FavVocabRecord extends HiveObject {
   @HiveField(4)
   Map<int, String> examples;
 
-  FavVocabRecord(
-      this.text, this.types, this.deleted, this.updateTimeStamp, this.examples);
+  @HiveField(5)
+  Map<int, int> examplesRef;
+
+  FavVocabRecord(this.text, this.types, this.deleted, this.updateTimeStamp,
+      this.examples, this.examplesRef);
 
   factory FavVocabRecord.empty(String vocab) {
-    return FavVocabRecord(vocab, 0, false, 0, {});
+    return FavVocabRecord(vocab, 0, false, 0, {}, {});
   }
 
-  FavVocabRecord addWordType(String type, String sentence) {
+  FavVocabRecord addWordType(String type, String example, int exampleRef) {
     types = types = VocabTypes.addWordType(types, type);
-    examples[VocabTypes.getIntType(type)] = sentence;
+    examples[VocabTypes.getIntType(type)] = example;
+    examplesRef[VocabTypes.getIntType(type)] = exampleRef;
     return this;
   }
 
   FavVocabRecord rmWordType(String type) {
     types = VocabTypes.rmWordType(types, type);
     examples.remove(VocabTypes.getIntType(type));
+    examplesRef.remove(VocabTypes.getIntType(type));
     return this;
   }
 

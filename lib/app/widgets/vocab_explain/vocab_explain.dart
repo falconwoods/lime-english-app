@@ -6,17 +6,19 @@ import 'package:lime_english/app/widgets/vocab_explain/vocab_explain_controller.
 
 class VocabExplain extends GetView<VocabExplainController> {
   final String vocab;
-  final String sentence;
+  final String example;
+  final int exampleRef;
 
   /// part of speech of the vocab in the sentence
   final int vocabType;
 
-  const VocabExplain(this.vocab, this.sentence, this.vocabType, {Key? key})
+  const VocabExplain(this.vocab, this.example, this.vocabType, this.exampleRef,
+      {Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.put(VocabExplainController(vocab, sentence));
+    Get.put(VocabExplainController(vocab, example, exampleRef));
 
     var content = Obx(() {
       var vi = controller.vocabInfo.value;
