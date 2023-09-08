@@ -4,6 +4,7 @@ class SwitchButton<T> extends StatefulWidget {
   final List<T> values;
   final List<Widget> widgets;
   final int defaultIndex;
+  final bool disabled;
   final void Function(int, dynamic)? onSwitch;
 
   const SwitchButton(
@@ -11,6 +12,7 @@ class SwitchButton<T> extends StatefulWidget {
       required this.values,
       required this.widgets,
       required this.defaultIndex,
+      this.disabled = false,
       this.onSwitch});
 
   @override
@@ -27,6 +29,7 @@ class _SwitchButtonState extends State<SwitchButton> {
   }
 
   void toggle() {
+    if (widget.disabled) return;
     setState(() {
       curIndex++;
       curIndex %= widget.values.length;

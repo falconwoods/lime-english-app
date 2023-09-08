@@ -35,7 +35,7 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
     }
 
     Get.bottomSheet(
-      VocabExplain(words[index], primaryText),
+      VocabExplain(words[index], primaryText, 1),
       isScrollControlled: true,
       barrierColor: Colors.transparent, // Set background color to transparent
     ).whenComplete(() {

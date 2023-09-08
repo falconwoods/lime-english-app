@@ -4,9 +4,11 @@ import 'package:lime_english/app/widgets/switch_button.dart';
 
 class FavSwitch extends StatelessWidget {
   final bool defaultValue;
+  final bool disabled;
   final void Function(bool)? onChanged;
 
-  const FavSwitch(this.defaultValue, {Key? key, this.onChanged})
+  const FavSwitch(this.defaultValue,
+      {Key? key, this.disabled = false, this.onChanged})
       : super(key: key);
 
   void onVChange(int index, dynamic value) {
@@ -20,7 +22,7 @@ class FavSwitch extends StatelessWidget {
       widgets: [
         Icon(
           FontAwesomeIcons.solidHeart,
-          color: Colors.green.shade300,
+          color: disabled ? Colors.grey : Colors.green.shade300,
           size: 10.0,
         ),
         const Icon(
@@ -30,6 +32,7 @@ class FavSwitch extends StatelessWidget {
         )
       ],
       defaultIndex: defaultValue ? 0 : 1,
+      disabled: disabled,
       onSwitch: onVChange,
     );
   }
