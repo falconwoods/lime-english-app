@@ -20,6 +20,7 @@ dependencies:
   freezed_annotation: ^2.4.1
   get: ^4.6.5
   get_storage: null
+  hive:
   hive_flutter: ^1.1.0
   json_annotation: ^4.8.1
   logger: ^2.0.1
@@ -36,6 +37,7 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.4.2
   json_serializable: ^6.7.1
+  hive_generator: 
 
 flutter:
   uses-material-design: true

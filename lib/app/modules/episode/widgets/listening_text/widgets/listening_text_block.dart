@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lime_english/app/data/enum/subtitle_option.dart';
+import 'package:lime_english/app/data/hive/fav_vocab_record.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/fav_switch.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/listening_text_block_controller.dart';
 import 'package:lime_english/app/services/player/player_service.dart';
@@ -34,7 +35,7 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
     }
 
     Get.bottomSheet(
-      VocabExplain(words[index]),
+      VocabExplain(words[index], primaryText),
       isScrollControlled: true,
       barrierColor: Colors.transparent, // Set background color to transparent
     ).whenComplete(() {
@@ -50,7 +51,10 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
       List<TextSpan> arr = [];
       for (int i = 0; i < words.length; i++) {
         LongPressGestureRecognizer? tapGes;
-        if (words[i].isWord()) {
+
+        String text = words[i];
+
+        if (text.isWord()) {
           tapGes = LongPressGestureRecognizer()
             ..onLongPress = () {
               onTapWord(i);
@@ -58,12 +62,18 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
         }
 
         Color bgColor = Colors.transparent;
+
+        FavVocabRecord fbr = controller.db.getFavVocab(text);
+        if (fbr.updateTimeStamp != 0) {
+          bgColor = Colors.blue.shade100;
+        }
+
         if (selectedWordIndex.value == i) {
           bgColor = const Color.fromARGB(255, 143, 214, 180);
         }
 
         arr.add(TextSpan(
-            text: words[i],
+            text: text,
             style: TextStyle(
                 fontSize: 16,
                 backgroundColor: bgColor,

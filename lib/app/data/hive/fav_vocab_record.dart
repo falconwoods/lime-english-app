@@ -3,7 +3,9 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:lime_english/app/data/hive/hive_id.dart';
 
-@HiveType(typeId: HiveId.FavVocab)
+part 'fav_vocab_record.g.dart';
+
+@HiveType(typeId: 3)
 class FavVocabRecord extends HiveObject {
   @HiveField(0)
   String text;
@@ -12,29 +14,35 @@ class FavVocabRecord extends HiveObject {
   @HiveField(1)
   int types;
 
-  @HiveField(3)
+  @HiveField(2)
   bool deleted;
 
-  @HiveField(2)
+  @HiveField(3)
   int updateTimeStamp;
 
-  FavVocabRecord(this.text, this.types, this.updateTimeStamp, this.deleted);
+  @HiveField(4)
+  Map<int, String> examples;
+
+  FavVocabRecord(
+      this.text, this.types, this.deleted, this.updateTimeStamp, this.examples);
 
   factory FavVocabRecord.empty(String vocab) {
-    return FavVocabRecord(vocab, 0, 0, false);
+    return FavVocabRecord(vocab, 0, false, 0, {});
   }
 
-  FavVocabRecord addWordType(String type) {
+  FavVocabRecord addWordType(String type, String sentence) {
     types = types = VocabTypes.addWordType(types, type);
+    examples[VocabTypes.getIntType(type)] = sentence;
     return this;
   }
 
   FavVocabRecord rmWordType(String type) {
     types = VocabTypes.rmWordType(types, type);
+    examples.remove(VocabTypes.getIntType(type));
     return this;
   }
 
-  bool hasWordType(int curTypes, String type) {
+  bool hasWordType(String type) {
     return VocabTypes.hasWordType(types, type);
   }
 }

@@ -5,11 +5,12 @@ import 'package:lime_english/app/widgets/vocab_explain/vocab_explain_controller.
 
 class VocabExplain extends GetView<VocabExplainController> {
   final String vocab;
-  const VocabExplain(this.vocab, {Key? key}) : super(key: key);
+  final String sentence;
+  const VocabExplain(this.vocab, this.sentence, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.put(VocabExplainController(vocab));
+    Get.put(VocabExplainController(vocab, sentence));
 
     var content = Obx(() {
       var vi = controller.vocabInfo.value;
@@ -22,7 +23,8 @@ class VocabExplain extends GetView<VocabExplainController> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 3, 5, 0),
-              child: FavSwitch(false, onChanged: (val) {
+              child:
+                  FavSwitch(controller.fvr.hasWordType(key), onChanged: (val) {
                 controller.favVocabType(key, val);
               }),
             ),

@@ -10,19 +10,26 @@ class VocabExplainController extends GetxController {
   late final DicService dic;
   late final DBService db;
   final String vocab;
+  final String sentence;
   late final Rx<DicWord> vocabInfo;
   late final Rx<Map<String, String>> meanings = Rx<Map<String, String>>({});
   late final PronounceService pronService;
+  late final FavVocabRecord fvr;
 
-  void favVocabType(String partOfSpeech, bool fav) {
-    Get.log('$vocab $partOfSpeech');
+  void favVocabType(String type, bool fav) {
+    Get.log('$vocab $type');
 
     FavVocabRecord fv = db.getFavVocab(vocab);
-    fv.deleted = !fav;
+    if (fav) {
+      fv.addWordType(type, sentence);
+    } else {
+      fv.rmWordType(type);
+    }
+
     db.saveFavVocab(fv);
   }
 
-  VocabExplainController(this.vocab) {
+  VocabExplainController(this.vocab, this.sentence) {
     vocabInfo = Rx<DicWord>(DicWord.empty(vocab));
   }
 
@@ -32,8 +39,11 @@ class VocabExplainController extends GetxController {
     dic = Get.find<DicService>();
     db = Get.find<DBService>();
     pronService = Get.find<PronounceService>();
+
     vocabInfo.value = await dic.findVocab(vocab);
     meanings.value = vocabInfo.value.meaning.splitMeaning();
+    fvr = db.getFavVocab(vocab);
+
     pronounceWord(vocab);
   }
 
