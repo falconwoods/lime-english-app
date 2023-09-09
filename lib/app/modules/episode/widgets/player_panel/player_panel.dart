@@ -1,32 +1,34 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening/listening_controller.dart';
 import 'package:lime_english/app/modules/episode/widgets/player_panel/palyer_panel_controller.dart';
+import 'package:lime_english/app/services/player/player_service.dart';
 import 'package:lime_english/app/widgets/switch_button.dart';
-import 'package:lime_english/core/utils/extensions/string_extensions.dart';
 
 class PlayerPanel extends GetView<PlayerPanelController> {
-  const PlayerPanel({super.key});
+  final PlayerService ps = Get.find<PlayerService>();
+
+  PlayerPanel({super.key}) {
+    Get.put(PlayerPanelController(), permanent: true);
+  }
 
   void onListeningMode() {}
 
   void onPlayPause() {
-    if (controller.ps.isPlaying.value) {
-      controller.ps.pause();
+    if (ps.isPlaying.value) {
+      ps.pause();
     } else {
-      controller.ps.play();
+      ps.play();
     }
   }
 
   void onPreSentence() {
-    controller.ps.preSentence();
+    ps.preSentence();
   }
 
   void onNextSentence() {
-    controller.ps.nextSentence();
+    ps.nextSentence();
   }
 
   void onSpeed() {}
@@ -40,8 +42,6 @@ class PlayerPanel extends GetView<PlayerPanelController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(PlayerPanelController());
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -76,7 +76,7 @@ class PlayerPanel extends GetView<PlayerPanelController> {
                 iconSize: 20,
                 onPressed: onPreSentence),
             Obx(
-              () => controller.ps.isPlaying.value
+              () => ps.isPlaying.value
                   ? IconButton(
                       icon: const Icon(FontAwesomeIcons.pause),
                       iconSize: 20,

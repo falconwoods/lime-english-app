@@ -7,16 +7,33 @@ import 'package:lime_english/app/modules/episode/widgets/listening/listening_con
 
 class Listening extends GetView<ListeningController> {
   final ListeningArg arg;
-  const Listening(this.arg, {Key? key}) : super(key: key);
+
+  Listening(this.arg, {Key? key}) : super(key: key) {
+    Get.put(ListeningController(), permanent: true);
+  }
+
+  Widget video() {
+    try {
+      return Obx(
+        () {
+          return controller.showVideo.value
+              ? AppVideoPlayer(controller.playerCtl)
+              : Container();
+        },
+      );
+    } catch (e) {
+      Get.log(isError: true, 'video ${e.toString()}');
+      return Container();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ListeningController(arg));
-
     return FutureBuilder<void>(
-        future: controller.initFuture,
+        future: controller.init(arg),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.connectionState == ConnectionState.waiting ||
+              snapshot.connectionState == ConnectionState.active) {
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -25,14 +42,7 @@ class Listening extends GetView<ListeningController> {
           } else {
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Obx(() {
-                  return controller.showVideo.value
-                      ? AppVideoPlayer(controller.playerCtl)
-                      : Container();
-                }),
-                ListeningText()
-              ],
+              children: [video(), ListeningText()],
             );
           }
         });

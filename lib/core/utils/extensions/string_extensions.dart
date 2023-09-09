@@ -18,7 +18,7 @@ extension StringExtensions on String {
   }
 
   Map<String, String> splitMeaning() {
-    final input = this;
+    final input = trim();
     final regex = RegExp(r"(\w+\.)");
 
     final matches = regex.allMatches(input);
@@ -26,7 +26,7 @@ extension StringExtensions on String {
 
     final resultMap = <String, String>{};
 
-    for (int i = 0; i < matches.length; i++) {
+    for (int i = 0; i < meanings.length; i++) {
       final key = matches.elementAt(i).group(0);
       final value = meanings[i];
       resultMap[key!] = value;

@@ -4,15 +4,22 @@ import 'package:lime_english/app/modules/episode/widgets/listening/listening_con
 import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/listening_text_block.dart';
 
 class ListeningTextController extends GetxController {
-  late final ScrollController scrollCtl;
   late final List<ListeningTextBlock> blocks = [];
+  late Worker? worker;
 
-  ListeningTextController(this.scrollCtl);
+  ListeningTextController();
 
   @override
   void onInit() {
     super.onInit();
+  }
 
+  @override
+  void onClose() {
+    worker?.dispose();
+  }
+
+  void init(ScrollController scrollCtl) {
     ListeningController lc = Get.find<ListeningController>();
 
     for (var i = 0; i < lc.primaryCap.length; i++) {
@@ -22,7 +29,7 @@ class ListeningTextController extends GetxController {
           key: k));
     }
 
-    ever(lc.curSubSequence, (sequence) {
+    worker = ever(lc.curSubSequence, (sequence) {
       GlobalKey key = blocks[sequence - 1].key as GlobalKey;
       scrollCtl.position.ensureVisible(key.currentContext!.findRenderObject()!,
           duration: const Duration(milliseconds: 500), curve: Curves.ease);

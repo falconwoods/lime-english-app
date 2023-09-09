@@ -9,24 +9,24 @@ import 'package:lime_english/app/services/player/player_service.dart';
 import 'package:video_player/video_player.dart';
 
 class ListeningController extends GetxController {
-  late final ListeningArg arg;
-  late final Future<void> initFuture;
+  late ListeningArg arg;
+  // late final Future<void> initFuture;
   final Rx<bool> showVideo = true.obs;
   final isDownloading = false.obs;
   final Rx<CaptionOption> capOption = CaptionOption.all.obs;
   final Rx<int> curSubSequence = 1.obs;
-  late final AppCaption primaryCap;
-  late final AppCaption secondaryCap;
-  late final VideoPlayerController playerCtl;
+  late AppCaption primaryCap;
+  late AppCaption secondaryCap;
+  late VideoPlayerController playerCtl;
 
-  late final Timer? _timer;
+  late Timer? _timer;
 
-  ListeningController(this.arg);
+  ListeningController();
 
   @override
   void onInit() {
     super.onInit();
-    initFuture = _init();
+    // initFuture = _init();
   }
 
   @override
@@ -36,7 +36,8 @@ class ListeningController extends GetxController {
     // playerCtl.removeListener(onPlayerUpdate);
   }
 
-  Future<void> _init() async {
+  Future<void> init(ListeningArg arg) async {
+    this.arg = arg;
     PlayerService ps = Get.find<PlayerService>();
     LoadResult ret = await ps.loadEpisode(arg.episode);
     primaryCap = ret.primarySub;

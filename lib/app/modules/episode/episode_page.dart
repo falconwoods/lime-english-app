@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lime_english/app/data/hive/episode_record.dart';
-import 'package:lime_english/app/modules/episode/controller.dart';
+import 'package:lime_english/app/modules/episode/episode_controller.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening/listening.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening/listening_arg.dart';
 import 'package:lime_english/app/modules/episode/widgets/player_panel/player_panel.dart';

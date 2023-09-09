@@ -17,7 +17,8 @@ class VocabExplain extends GetView<VocabExplainController> {
       this.captionSequence,
       {Key? key})
       : super(key: key) {
-    Get.put(VocabExplainController(vocab, example, episodeId, captionSequence));
+    Get.put(VocabExplainController(), permanent: true);
+    controller.init(vocab);
   }
 
   @override
@@ -26,8 +27,8 @@ class VocabExplain extends GetView<VocabExplainController> {
       var vi = controller.vocabInfo.value;
       var meanings = controller.meanings.value;
       List<Widget> meaningWidgets = [];
-      meanings.forEach((key, value) {
-        bool isCurType = VocabTypes.getIntType(key) == vocabType;
+      meanings.forEach((wordType, meaning) {
+        bool isCurType = VocabTypes.getIntType(wordType) == vocabType;
 
         meaningWidgets.add(Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -35,16 +36,17 @@ class VocabExplain extends GetView<VocabExplainController> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 3, 5, 0),
-              child: FavSwitch(controller.fvr.hasWordType(key),
+              child: FavSwitch(controller.fvr.value.hasWordType(wordType),
                   disabled: !isCurType, onChanged: (val) {
                 if (isCurType) {
-                  controller.favVocabType(key, val);
+                  controller.favVocabType(vocab, wordType, val, example,
+                      episodeId, captionSequence);
                 }
               }),
             ),
             Expanded(
                 child: Text(
-              '$key$value',
+              '$wordType$meaning',
               // softWrap: true,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(color: isCurType ? Colors.black : Colors.grey),

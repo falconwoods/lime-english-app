@@ -9,19 +9,13 @@ import 'package:lime_english/core/utils/extensions/string_extensions.dart';
 class VocabExplainController extends GetxController {
   late final DicService dic;
   late final DBService db;
-  final String vocab;
-  final String sentence;
-  final int episodeId;
-  final int captionSequence;
-  late final Rx<DicWord> vocabInfo;
+  late final Rx<DicWord> vocabInfo = Rx<DicWord>(DicWord.empty(''));
   late final Rx<Map<String, String>> meanings = Rx<Map<String, String>>({});
   late final PronounceService pronService;
-  late final FavVocabRecord fvr;
+  late final Rx<FavVocabRecord> fvr =
+      Rx<FavVocabRecord>(FavVocabRecord.empty(""));
 
-  VocabExplainController(
-      this.vocab, this.sentence, this.episodeId, this.captionSequence) {
-    vocabInfo = Rx<DicWord>(DicWord.empty(vocab));
-  }
+  VocabExplainController();
 
   @override
   void onInit() async {
@@ -30,10 +24,19 @@ class VocabExplainController extends GetxController {
     db = Get.find<DBService>();
     pronService = Get.find<PronounceService>();
 
+    Get.log('VocabExplainController onInit');
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    Get.log('VocabExplainController onClose');
+  }
+
+  void init(String vocab) async {
     vocabInfo.value = await dic.findVocab(vocab);
     meanings.value = vocabInfo.value.meaning.splitMeaning();
-    fvr = db.getFavVocab(vocab);
-
+    fvr.value = db.getFavVocab(vocab);
     pronounceWord(vocab);
   }
 
@@ -41,7 +44,8 @@ class VocabExplainController extends GetxController {
     pronService.pronounce(vocab);
   }
 
-  void favVocabType(String type, bool fav) {
+  void favVocabType(String vocab, String type, bool fav, String sentence,
+      int episodeId, int captionSequence) {
     FavVocabRecord fv = db.getFavVocab(vocab);
     if (fav) {
       fv.addWordType(type, sentence, episodeId, captionSequence);
