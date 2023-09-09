@@ -25,4 +25,42 @@ class AppUtil {
 
     return [episodeId, sequence];
   }
+
+  static String tryGetSingular(String word) {
+    // s
+    if (word.endsWith('s')) {
+      return word.substring(0, word.length - 1);
+    }
+
+    // es
+    if (word.endsWith('es')) {
+      String stem = word.substring(0, word.length - 2);
+      if (stem.endsWith('s') ||
+          stem.endsWith('x') ||
+          stem.endsWith('z') ||
+          stem.endsWith('sh') ||
+          stem.endsWith('ch')) {
+        return stem;
+      }
+    }
+
+    // y
+    if (word.endsWith('ies')) {
+      String stem = word.substring(0, word.length - 3);
+      if (!isVowel(stem[stem.length - 1])) {
+        return stem + 'y';
+      }
+    }
+
+    // Irregular
+    // if (word == 'men') {
+    //   return 'man';
+    // }
+
+    return word;
+  }
+
+  static bool isVowel(String character) {
+    return 'aeiouAEIOU'.contains(character);
+  }
 }

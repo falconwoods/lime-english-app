@@ -9,7 +9,7 @@ class Listening extends GetView<ListeningController> {
   final ListeningArg arg;
 
   Listening(this.arg, {Key? key}) : super(key: key) {
-    Get.put(ListeningController(), permanent: true);
+    Get.put(ListeningController(), permanent: false);
   }
 
   Widget video() {

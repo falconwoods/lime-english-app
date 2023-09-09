@@ -25,6 +25,7 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
       {Key? key})
       : super(key: key) {
     words = primaryText.splitWords();
+    Get.log(words.toString());
   }
 
   void onTapWord(int index) async {

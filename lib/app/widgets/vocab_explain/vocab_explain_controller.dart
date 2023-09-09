@@ -4,6 +4,7 @@ import 'package:lime_english/app/data/sqlite/dic_word.dart';
 import 'package:lime_english/app/services/db_service.dart';
 import 'package:lime_english/app/services/dic_service.dart';
 import 'package:lime_english/app/services/pronounce_service.dart';
+import 'package:lime_english/core/utils/app_util.dart';
 import 'package:lime_english/core/utils/extensions/string_extensions.dart';
 
 class VocabExplainController extends GetxController {
@@ -34,9 +35,16 @@ class VocabExplainController extends GetxController {
   }
 
   void init(String vocab) async {
-    vocabInfo.value = await dic.findVocab(vocab);
-    meanings.value = vocabInfo.value.meaning.splitMeaning();
     fvr.value = db.getFavVocab(vocab);
+
+    var ret = await dic.findVocab(vocab);
+    if (ret.meaning.isEmpty) {
+      vocab = AppUtil.tryGetSingular(vocab);
+      ret = await dic.findVocab(vocab);
+    }
+    vocabInfo.value = ret;
+    meanings.value = ret.meaning.splitMeaning();
+
     pronounceWord(vocab);
   }
 

@@ -17,7 +17,7 @@ class VocabExplain extends GetView<VocabExplainController> {
       this.captionSequence,
       {Key? key})
       : super(key: key) {
-    Get.put(VocabExplainController(), permanent: true);
+    Get.put(VocabExplainController(), permanent: false);
     controller.init(vocab);
   }
 
