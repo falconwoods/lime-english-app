@@ -71,7 +71,7 @@ class VocabExplain extends GetView<VocabExplainController> {
                 Padding(
                   padding: const EdgeInsets.only(left: 5),
                   child: Text(
-                    '/${vi.pronunciation}/',
+                    vi.pronunciation.isNotEmpty ? '/${vi.pronunciation}/' : '',
                     style: const TextStyle(
                         fontStyle: FontStyle.italic, color: Colors.black38),
                   ),

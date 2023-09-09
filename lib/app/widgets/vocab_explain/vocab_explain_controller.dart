@@ -35,6 +35,7 @@ class VocabExplainController extends GetxController {
   }
 
   void init(String vocab) async {
+    // fav the original vocab instead of singular form
     fvr.value = db.getFavVocab(vocab);
 
     var ret = await dic.findVocab(vocab);
