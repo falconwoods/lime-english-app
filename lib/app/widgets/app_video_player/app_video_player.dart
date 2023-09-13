@@ -14,9 +14,12 @@ class AppVideoPlayer extends GetView<AppVideoPlayerController> {
   Widget build(BuildContext context) {
     Get.put(AppVideoPlayerController(playerCtl, onUpdate));
 
-    return AspectRatio(
-      aspectRatio: playerCtl.value.aspectRatio,
-      child: VideoPlayer(playerCtl),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(6.0),
+      child: AspectRatio(
+        aspectRatio: playerCtl.value.aspectRatio,
+        child: VideoPlayer(playerCtl),
+      ),
     );
   }
 }

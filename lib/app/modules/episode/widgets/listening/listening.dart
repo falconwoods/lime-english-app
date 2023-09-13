@@ -16,9 +16,12 @@ class Listening extends GetView<ListeningController> {
     try {
       return Obx(
         () {
-          return controller.showVideo.value
-              ? AppVideoPlayer(controller.playerCtl)
-              : Container();
+          return Padding(
+            padding: const EdgeInsets.all(5),
+            child: controller.showVideo.value
+                ? AppVideoPlayer(controller.playerCtl)
+                : Container(),
+          );
         },
       );
     } catch (e) {

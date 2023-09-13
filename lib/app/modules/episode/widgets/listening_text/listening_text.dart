@@ -21,11 +21,13 @@ class ListeningText extends StatelessWidget {
     ever(lc.curSubSequence, (sequence) {
       Get.log('subIndex Updated: $sequence');
       GlobalKey key = blocks[sequence - 1].key as GlobalKey;
-      // if(_scrollController.position.
-      _scrollController.position.ensureVisible(
-          key.currentContext!.findRenderObject()!,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.ease);
+      if (_scrollController.positions.isNotEmpty &&
+          key.currentContext != null) {
+        _scrollController.position.ensureVisible(
+            key.currentContext!.findRenderObject()!,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.ease);
+      }
     });
   }
 
