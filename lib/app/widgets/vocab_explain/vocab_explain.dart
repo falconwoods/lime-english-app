@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lime_english/app/data/hive/fav_vocab_record.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/fav_switch.dart';
 import 'package:lime_english/app/widgets/vocab_explain/vocab_explain_controller.dart';
+import 'package:lime_english/core/utils/vocab_pos.dart';
 
 class VocabExplain extends GetView<VocabExplainController> {
   final String vocab;
   final String example;
   final int episodeId;
   final int captionSequence;
+  final int vocabPosIndex;
 
-  /// part of speech of the vocab in the sentence
-  final int vocabType;
-
-  VocabExplain(this.vocab, this.example, this.vocabType, this.episodeId,
+  VocabExplain(this.vocab, this.example, this.vocabPosIndex, this.episodeId,
       this.captionSequence,
       {Key? key})
       : super(key: key) {
@@ -27,8 +25,9 @@ class VocabExplain extends GetView<VocabExplainController> {
       var vi = controller.vocabInfo.value;
       var meanings = controller.meanings.value;
       List<Widget> meaningWidgets = [];
-      meanings.forEach((wordType, meaning) {
-        bool isCurType = VocabTypes.getIntType(wordType) == vocabType;
+      meanings.forEach((vt, meaning) {
+        bool isCurType = VocabPOS.getPOSIndex(vt) == vocabPosIndex;
+        Get.log('$vocab $vocabPosIndex ${VocabPOS.getPOSIndex(vt)}');
 
         meaningWidgets.add(Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -36,17 +35,17 @@ class VocabExplain extends GetView<VocabExplainController> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 3, 5, 0),
-              child: FavSwitch(controller.fvr.value.hasWordType(wordType),
+              child: FavSwitch(controller.fvr.value.hasPOS(vt),
                   disabled: !isCurType, onChanged: (val) {
                 if (isCurType) {
-                  controller.favVocabType(vocab, wordType, val, example,
-                      episodeId, captionSequence);
+                  controller.favVocabType(
+                      vocab, vt, val, example, episodeId, captionSequence);
                 }
               }),
             ),
             Expanded(
                 child: Text(
-              '$wordType$meaning',
+              '$vt$meaning',
               // softWrap: true,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(color: isCurType ? Colors.black : Colors.grey),

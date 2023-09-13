@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:lime_english/app/data/episode_meta.dart';
 import 'package:lime_english/app/data/hive/episode_record.dart';
 import 'package:lime_english/app/services/file_service.dart';
 import 'package:lime_english/app/services/player/app_caption.dart';
@@ -11,8 +12,9 @@ import 'package:video_player/video_player.dart';
 class LoadResult {
   late final AppCaption primarySub;
   late final AppCaption secondarySub;
+  late final EpisodeMeta episodeMeta;
 
-  LoadResult(this.primarySub, this.secondarySub);
+  LoadResult(this.primarySub, this.secondarySub, this.episodeMeta);
 }
 
 enum ResourceType { network, asset, file }
@@ -69,6 +71,8 @@ class PlayerService extends GetxService {
         .loadFromFile(await fs.download(episode.captions['en']!));
     AppCaption secSub = await AppCaption()
         .loadFromFile(await fs.download(episode.captions['cn']!));
+    EpisodeMeta episodeMeta =
+        await EpisodeMeta().loadFromFile(await fs.download(episode.meta));
 
     // init video player
     videoCtl?.dispose();
@@ -78,7 +82,7 @@ class PlayerService extends GetxService {
 
     caption = priSub;
 
-    LoadResult ret = LoadResult(priSub, secSub);
+    LoadResult ret = LoadResult(priSub, secSub, episodeMeta);
     return ret;
   }
 

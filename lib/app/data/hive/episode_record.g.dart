@@ -21,13 +21,14 @@ class EpisodeRecordAdapter extends TypeAdapter<EpisodeRecord> {
       fields[1] as String,
       fields[2] as String,
       (fields[3] as Map).cast<String, String>(),
+      fields[4] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, EpisodeRecord obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.episodeId)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class EpisodeRecordAdapter extends TypeAdapter<EpisodeRecord> {
       ..writeByte(2)
       ..write(obj.mediaSrc)
       ..writeByte(3)
-      ..write(obj.captions);
+      ..write(obj.captions)
+      ..writeByte(4)
+      ..write(obj.meta);
   }
 
   @override

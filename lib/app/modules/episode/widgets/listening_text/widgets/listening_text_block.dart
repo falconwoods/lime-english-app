@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lime_english/app/data/enum/subtitle_option.dart';
 import 'package:lime_english/app/data/hive/fav_vocab_record.dart';
+import 'package:lime_english/app/modules/episode/widgets/listening/listening_controller.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/fav_switch.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/listening_text_block_controller.dart';
 import 'package:lime_english/app/services/player/player_service.dart';
@@ -28,7 +29,7 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
     Get.log(words.toString());
   }
 
-  void onTapWord(int index) async {
+  void onTapWord(int index, int startIndex) async {
     selectedWordIndex.value = index;
     PlayerService ps = controller.ps;
     bool isPlaying = ps.isPlaying.value;
@@ -36,8 +37,11 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
       ps.pause();
     }
 
+    var lc = Get.find<ListeningController>();
+    int vocabPosIndex = lc.episodeMeta.getVocabPOSIndex(sequence, startIndex);
+
     Get.bottomSheet(
-      VocabExplain(words[index], primaryText, 1,
+      VocabExplain(words[index], primaryText, vocabPosIndex,
           controller.listenCtrl.arg.episode.episodeId, sequence),
       isScrollControlled: true,
       barrierColor: Colors.transparent, // Set background color to transparent
@@ -51,17 +55,24 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
 
   getPrimaryText() {
     return Obx(() {
-      List<TextSpan> arr = [];
+      List<WidgetSpan> arr = [];
+      int startIndex = 0;
       for (int i = 0; i < words.length; i++) {
         LongPressGestureRecognizer? tapGes;
 
+        if (i != 0) {
+          startIndex += words[i - 1].length;
+        }
+
         String text = words[i];
 
+        VoidCallback? onCB;
+
         if (text.isWord()) {
+          int si = startIndex;
+          onCB = () => onTapWord(i, si);
           tapGes = LongPressGestureRecognizer()
-            ..onLongPress = () {
-              onTapWord(i);
-            };
+            ..onLongPress = () => onTapWord(i, si);
         }
 
         Color bgColor = Colors.transparent;
@@ -75,16 +86,26 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
           bgColor = const Color.fromARGB(255, 143, 214, 180);
         }
 
-        arr.add(TextSpan(
-            text: text,
-            style: TextStyle(
-                fontSize: 16,
-                backgroundColor: bgColor,
-                color: playingSequence.value == sequence
-                    ? Colors.green.shade400
-                    : Colors.black,
-                fontWeight: FontWeight.w400),
-            recognizer: tapGes));
+        arr.add(WidgetSpan(
+            child: GestureDetector(
+          onLongPress: onCB,
+          child: Container(
+              decoration: BoxDecoration(
+                color: bgColor,
+                borderRadius:
+                    BorderRadius.circular(6.0), // Adjust the radius as needed
+              ),
+              child: Text(
+                text,
+                style: TextStyle(
+                    fontSize: 16,
+                    // backgroundColor: bgColor,
+                    color: playingSequence.value == sequence
+                        ? Colors.green.shade400
+                        : Colors.black,
+                    fontWeight: FontWeight.w400),
+              )),
+        )));
       }
 
       return RichText(

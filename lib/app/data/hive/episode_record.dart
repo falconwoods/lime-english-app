@@ -17,6 +17,9 @@ class EpisodeRecord extends HiveObject {
   @HiveField(3)
   Map<String, String> captions;
 
-  EpisodeRecord(
-      this.episodeId, this.episodeTitle, this.mediaSrc, this.captions);
+  @HiveField(4)
+  String meta;
+
+  EpisodeRecord(this.episodeId, this.episodeTitle, this.mediaSrc, this.captions,
+      this.meta);
 }

@@ -74,10 +74,14 @@ class EpisodePage extends GetView<EpisodeController> {
               child: Listening(ListeningArg(
                   programId: 1,
                   episode: EpisodeRecord(
-                      1, 'Ted', 'http://router.gosolo.space:10000/ted2.mp4', {
-                    'cn': 'http://router.gosolo.space:10000/ted2-cn.srt',
-                    'en': 'http://router.gosolo.space:10000/ted2-en.srt'
-                  }))),
+                      1,
+                      'Ted',
+                      'http://router.gosolo.space:10000/ted2.mp4',
+                      {
+                        'cn': 'http://router.gosolo.space:10000/ted2-cn.srt',
+                        'en': 'http://router.gosolo.space:10000/ted2-en.srt'
+                      },
+                      'http://router.gosolo.space:10000/ted2.json'))),
             ),
             const Text('reading')
           ],

@@ -57,9 +57,9 @@ class VocabExplainController extends GetxController {
       int episodeId, int captionSequence) {
     FavVocabRecord fv = db.getFavVocab(vocab);
     if (fav) {
-      fv.addWordType(type, sentence, episodeId, captionSequence);
+      fv.addWordPOS(type, sentence, episodeId, captionSequence);
     } else {
-      fv.rmWordType(type);
+      fv.rmWordPOS(type);
     }
 
     db.saveFavVocab(fv);

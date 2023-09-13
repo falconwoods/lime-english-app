@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:lime_english/app/data/enum/subtitle_option.dart';
+import 'package:lime_english/app/data/episode_meta.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening/listening_arg.dart';
 import 'package:lime_english/app/services/player/app_caption.dart';
 import 'package:lime_english/app/services/player/player_service.dart';
@@ -17,6 +18,7 @@ class ListeningController extends GetxController {
   final Rx<int> curSubSequence = 1.obs;
   late AppCaption primaryCap;
   late AppCaption secondaryCap;
+  late EpisodeMeta episodeMeta;
   late VideoPlayerController playerCtl;
 
   late Timer? _timer;
@@ -42,6 +44,7 @@ class ListeningController extends GetxController {
     LoadResult ret = await ps.loadEpisode(arg.episode);
     primaryCap = ret.primarySub;
     secondaryCap = ret.secondarySub;
+    episodeMeta = ret.episodeMeta;
     playerCtl = ps.videoCtl!;
     // playerCtl.addListener(onPlayerUpdate);
     // playerCtl.play();
