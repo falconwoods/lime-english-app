@@ -17,5 +17,22 @@
     "Hot Program":"热门栏目",
     "Subscription Update": "订阅更新",
     "Listening":"听力",
-    "Reading":"阅读"
+    "Reading":"阅读",
+    "noun": "名词",
+    "proper noun": "专有名词",
+    "verb": "动词",
+    "auxiliary verb": "助动词",
+    "adjective": "形容词",
+    "conjunction": "连词",
+    "coordinate conjunction": "并列连词",
+    "subordinating conjunction": "从属连词",
+    "adposition": "介词",
+    "adverb": "副词",
+    "determiner": "限定词",
+    "interjection": "感叹词",
+    "particle": "小品词",
+    "pronoun": "代词",
+    "numeral": "数词"
+
+
 }

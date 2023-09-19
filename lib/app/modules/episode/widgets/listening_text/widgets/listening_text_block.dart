@@ -83,7 +83,8 @@ class ListeningTextBlock extends GetView<ListeningTextBlockController> {
         }
 
         if (selectedWordIndex.value == i) {
-          bgColor = const Color.fromARGB(255, 143, 214, 180);
+          bgColor =
+              Colors.blue.shade200; //const Color.fromARGB(255, 143, 214, 180);
         }
 
         arr.add(WidgetSpan(

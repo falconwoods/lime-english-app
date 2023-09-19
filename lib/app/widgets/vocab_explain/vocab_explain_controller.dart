@@ -8,7 +8,7 @@ import 'package:lime_english/core/utils/app_util.dart';
 import 'package:lime_english/core/utils/extensions/string_extensions.dart';
 
 class VocabExplainController extends GetxController {
-  late final DicService dic;
+  late final DicService ds;
   late final DBService db;
   late final Rx<DicWord> vocabInfo = Rx<DicWord>(DicWord.empty(''));
   late final Rx<Map<String, String>> meanings = Rx<Map<String, String>>({});
@@ -21,7 +21,7 @@ class VocabExplainController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    dic = Get.find<DicService>();
+    ds = Get.find<DicService>();
     db = Get.find<DBService>();
     pronService = Get.find<PronounceService>();
 
@@ -38,10 +38,10 @@ class VocabExplainController extends GetxController {
     // fav the original vocab instead of singular form
     fvr.value = db.getFavVocab(vocab);
 
-    var ret = await dic.findVocab(vocab);
+    var ret = await ds.findVocab(vocab);
     if (ret.meaning.isEmpty) {
       vocab = AppUtil.tryGetSingular(vocab);
-      ret = await dic.findVocab(vocab);
+      ret = await ds.findVocab(vocab);
     }
     vocabInfo.value = ret;
     meanings.value = ret.meaning.splitMeaning();

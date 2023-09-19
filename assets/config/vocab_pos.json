@@ -1,0 +1,181 @@
+{
+    "npl_pos": {
+        "1": {
+            "name": "NO_TAG",
+            "category": "unknow",
+            "alias": [],
+            "desc": "unknow"
+        },
+        "2": {
+            "name": "X",
+            "category": "other",
+            "alias": [],
+            "desc": "other"
+        },
+        "3": {
+            "name": "PUNCT",
+            "category": "punct",
+            "alias": [],
+            "desc": "punctuation"
+        },
+        "4": {
+            "name": "SYM",
+            "category": "punct",
+            "alias": [
+                "sym"
+            ],
+            "desc": "symbol"
+        },
+        "5": {
+            "name": "EOL",
+            "category": "other",
+            "alias": [],
+            "desc": "end of line"
+        },
+        "6": {
+            "name": "SPACE",
+            "category": "other",
+            "alias": [],
+            "desc": "space"
+        },
+        "7": {
+            "name": "NOUN",
+            "category": "noun",
+            "alias": [
+                "n"
+            ],
+            "desc": "noun"
+        },
+        "8": {
+            "name": "PROPN",
+            "category": "noun",
+            "alias": [
+                "n"
+            ],
+            "desc": "proper noun"
+        },
+        "9": {
+            "name": "VERB",
+            "category": "verb",
+            "alias": [
+                "v",
+                "vt",
+                "vi",
+                "vbl"
+            ],
+            "desc": "verb"
+        },
+        "10": {
+            "name": "AUX",
+            "category": "verb",
+            "alias": [
+                "aux"
+            ],
+            "desc": "auxiliary verb"
+        },
+        "11": {
+            "name": "ADJ",
+            "category": "adj",
+            "alias": [
+                "adj"
+            ],
+            "desc": "adjective"
+        },
+        "12": {
+            "name": "CONJ",
+            "category": "conj",
+            "alias": [
+                "conj"
+            ],
+            "desc": "conjunction"
+        },
+        "13": {
+            "name": "CCONJ",
+            "category": "conj",
+            "alias": [
+                "conj"
+            ],
+            "desc": "coordinating conjunction"
+        },
+        "14": {
+            "name": "SCONJ",
+            "category": "conj",
+            "alias": [
+                "conj"
+            ],
+            "desc": "subordinating conjunction"
+        },
+        "15": {
+            "name": "ADP",
+            "category": "adp",
+            "alias": [
+                "prep"
+            ],
+            "desc": "adposition"
+        },
+        "16": {
+            "name": "ADV",
+            "category": "adv",
+            "alias": [
+                "adv"
+            ],
+            "desc": "adverb"
+        },
+        "17": {
+            "name": "DET",
+            "category": "det",
+            "alias": [
+                "art"
+            ],
+            "desc": "determiner"
+        },
+        "18": {
+            "name": "INTJ",
+            "category": "intj",
+            "alias": [
+                "interj",
+                "int"
+            ],
+            "desc": "interjection"
+        },
+        "19": {
+            "name": "PART",
+            "category": "part",
+            "alias": [
+                "part"
+            ],
+            "desc": "particle"
+        },
+        "20": {
+            "name": "PRON",
+            "category": "pron",
+            "alias": [
+                "pron"
+            ],
+            "desc": "pronoun"
+        },
+        "21": {
+            "name": "NUM",
+            "category": "num",
+            "alias": [
+                "num"
+            ],
+            "desc": "numeral"
+        }
+    },
+    "dic_pos": {
+        "n": 1,
+        "v": 2,
+        "vi": 3,
+        "vt": 4,
+        "vbl": 2,
+        "aux": 2,
+        "adj": 7,
+        "conj": 8,
+        "prep": 9,
+        "adv": 10,
+        "art": 11,
+        "int": 12,
+        "num": 13
+    }
+}

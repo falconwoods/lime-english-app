@@ -18,7 +18,7 @@ extension StringExtensions on String {
     return pattern.hasMatch(this);
   }
 
-  Map<String, String> splitMeaning() {
+  Map<String, String> splitMeaning2() {
     final input = trim();
     final regex = RegExp(r"(\w+\.)");
 
@@ -32,6 +32,23 @@ extension StringExtensions on String {
       final value = meanings[i];
       resultMap[key!] = value;
     }
+    return resultMap;
+  }
+
+  Map<String, String> splitMeaning() {
+    final input = trim();
+    final meanings = input.split(r'\n').where((s) => s.isNotEmpty).toList();
+    final resultMap = <String, String>{};
+
+    final regex = RegExp(r"(\w+)\.(.+)");
+    for (int i = 0; i < meanings.length; i++) {
+      final match = regex.firstMatch(meanings[i]);
+      if (match == null) continue;
+      var key = match.group(1)!;
+      key.substring(0, key.length - 1);
+      resultMap[key] = match.group(2)!;
+    }
+
     return resultMap;
   }
 }

@@ -44,6 +44,7 @@ flutter:
   assets:
     - .env
     - assets/translations/zh_CN.json
+    - assets/config/vocab_pos.json
     - assets/db/dic.db
     - assets/images/1.jpg
     - assets/video/ted1.mp4

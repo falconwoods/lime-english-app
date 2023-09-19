@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lime_english/app/modules/episode/widgets/listening_text/widgets/fav_switch.dart';
 import 'package:lime_english/app/widgets/vocab_explain/vocab_explain_controller.dart';
-import 'package:lime_english/core/utils/vocab_pos.dart';
 
 class VocabExplain extends GetView<VocabExplainController> {
   final String vocab;
   final String example;
   final int episodeId;
   final int captionSequence;
-  final int vocabPosIndex;
+  final int nplPosId;
 
-  VocabExplain(this.vocab, this.example, this.vocabPosIndex, this.episodeId,
+  VocabExplain(this.vocab, this.example, this.nplPosId, this.episodeId,
       this.captionSequence,
       {Key? key})
       : super(key: key) {
@@ -25,9 +24,9 @@ class VocabExplain extends GetView<VocabExplainController> {
       var vi = controller.vocabInfo.value;
       var meanings = controller.meanings.value;
       List<Widget> meaningWidgets = [];
-      meanings.forEach((vt, meaning) {
-        bool isCurType = VocabPOS.getPOSIndex(vt) == vocabPosIndex;
-        Get.log('$vocab $vocabPosIndex ${VocabPOS.getPOSIndex(vt)}');
+      meanings.forEach((pos, meaning) {
+        bool posMatch = controller.ds.matchNPLPos(nplPosId, pos);
+        // Get.log('$vocab $vocabPosIndex ${VocabPOS.getPOSId(vt)}');
 
         meaningWidgets.add(Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -35,20 +34,20 @@ class VocabExplain extends GetView<VocabExplainController> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 3, 5, 0),
-              child: FavSwitch(controller.fvr.value.hasPOS(vt),
-                  disabled: !isCurType, onChanged: (val) {
-                if (isCurType) {
-                  controller.favVocabType(
-                      vocab, vt, val, example, episodeId, captionSequence);
-                }
+              child: FavSwitch(controller.fvr.value.hasPOS(pos),
+                  disabled: false, onChanged: (val) {
+                controller.favVocabType(
+                    vocab, pos, val, example, episodeId, captionSequence);
               }),
             ),
             Expanded(
                 child: Text(
-              '$vt$meaning',
+              '$pos.$meaning',
               // softWrap: true,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: isCurType ? Colors.black : Colors.grey),
+              style: TextStyle(
+                color: posMatch ? Colors.black : Colors.black45,
+              ),
             ))
           ],
         ));
@@ -61,23 +60,41 @@ class VocabExplain extends GetView<VocabExplainController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  vi.word,
-                  style: TextStyle(fontSize: 18, color: Colors.green.shade400),
+                Row(
+                  children: [
+                    Text(
+                      vi.word,
+                      style:
+                          TextStyle(fontSize: 18, color: Colors.blue.shade300),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Text(
+                        vi.pronunciation.isNotEmpty
+                            ? '/${vi.pronunciation}/'
+                            : '',
+                        style: const TextStyle(
+                            fontStyle: FontStyle.italic, color: Colors.black38),
+                      ),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 5),
-                  child: Text(
-                    vi.pronunciation.isNotEmpty ? '/${vi.pronunciation}/' : '',
-                    style: const TextStyle(
-                        fontStyle: FontStyle.italic, color: Colors.black38),
-                  ),
-                )
+                Container(
+                  padding: const EdgeInsets.fromLTRB(2, 0, 2, 0),
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(2)),
+                  child:
+                      Text(controller.ds.getVocabPos(nplPosId)?.desc.tr ?? '',
+                          style: const TextStyle(
+                              // fontStyle: FontStyle.italic,
+                              color: Colors.black26)),
+                ),
               ],
             ),
-            ...meaningWidgets
+            ...meaningWidgets,
           ],
         ),
       );
